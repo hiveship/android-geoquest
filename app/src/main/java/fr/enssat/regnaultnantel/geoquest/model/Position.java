@@ -1,4 +1,4 @@
-package fr.enssat.regnaultnantel.geoquest;
+package fr.enssat.regnaultnantel.geoquest.model;
 
 import android.Manifest;
 import android.content.Context;
@@ -9,7 +9,11 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 
-public class Position {
+import java.util.Observable;
+
+import fr.enssat.regnaultnantel.geoquest.MainActivity;
+
+public class Position extends Observable{
     public Position(MainActivity mainActivity) {
         LocationManager locationManager = (LocationManager) mainActivity.getSystemService(Context.LOCATION_SERVICE);
 

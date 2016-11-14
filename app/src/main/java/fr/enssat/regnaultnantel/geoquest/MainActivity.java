@@ -3,12 +3,52 @@ package fr.enssat.regnaultnantel.geoquest;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import org.osmdroid.api.IMapController;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
+
+import java.util.Observable;
+import java.util.Observer;
+
+import fr.enssat.regnaultnantel.geoquest.model.Position;
+
+public class MainActivity extends AppCompatActivity implements Observer {
+    private IMapController mapController;
+    private MapView mapView;
+
+    private double initialLongitude;
+    private double initialLatitude;
+    private Position position;
+
+    public MainActivity(){
+        this.initialLatitude = 48.730031;
+        this.initialLongitude = -3.462632;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
+        this.position = new Position(this);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Position P = new Position(this);
+        setContentView(R.layout.map);
+        mapView = (MapView) findViewById(R.id.map);
+        mapView.setTileSource(TileSourceFactory.MAPNIK);
+        mapView.setBuiltInZoomControls(true);
+        mapController = mapView.getController();
+        mapController.setZoom(20);
+
+        GeoPoint initialUserPosition = new GeoPoint(initialLatitude, initialLongitude);
+        mapController.setCenter(initialUserPosition);
+        //mapView.setUseDataConnection(false);
+    }
+
+
+    @Override
+    public void update(Observable o, Object arg) {
+        // TODO: Récupérer la nouvelle position GPS
+        double newLatitude = -1; //TODO
+        double newLongitude = -1; //TODO
+        GeoPoint newUserPosition = new GeoPoint(newLatitude, newLongitude);
+        mapController.animateTo(newUserPosition);
     }
 }
