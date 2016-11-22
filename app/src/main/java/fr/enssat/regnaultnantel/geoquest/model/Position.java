@@ -1,13 +1,10 @@
 package fr.enssat.regnaultnantel.geoquest.model;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 
 import java.util.Observable;
 
@@ -34,9 +31,9 @@ public class Position extends Observable{
         };
 
         // Register the listener with the Location Manager to receive location updates
-        try{
+        try {
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-        }catch (SecurityException e){
+        } catch (SecurityException e) {
             e.printStackTrace();
         }
     }
