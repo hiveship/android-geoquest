@@ -1,8 +1,9 @@
-package fr.enssat.regnaultnantel.geoquest;
+package fr.enssat.regnaultnantel.geoquest.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-
+import fr.enssat.regnaultnantel.geoquest.R;
+import fr.enssat.regnaultnantel.geoquest.model.Position;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
@@ -11,9 +12,7 @@ import org.osmdroid.views.MapView;
 import java.util.Observable;
 import java.util.Observer;
 
-import fr.enssat.regnaultnantel.geoquest.model.Position;
-
-public class MainActivity extends AppCompatActivity implements Observer {
+public class GeoQuestMainActivity extends AppCompatActivity implements Observer {
     private IMapController mapController;
     private MapView mapView;
 
@@ -21,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
     private double initialLatitude;
     private Position position;
 
-    public MainActivity(){
+    public GeoQuestMainActivity(){
         this.initialLatitude = 48.730031;
         this.initialLongitude = -3.462632;
     }

@@ -5,13 +5,13 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import fr.enssat.regnaultnantel.geoquest.activities.GeoQuestMainActivity;
+import fr.enssat.regnaultnantel.geoquest.activities.MainActivity;
 
 import java.util.Observable;
 
-import fr.enssat.regnaultnantel.geoquest.MainActivity;
-
 public class Position extends Observable{
-    public Position(MainActivity mainActivity) {
+    public Position(GeoQuestMainActivity mainActivity) {
         LocationManager locationManager = (LocationManager) mainActivity.getSystemService(Context.LOCATION_SERVICE);
 
         LocationListener locationListener = new LocationListener() {
