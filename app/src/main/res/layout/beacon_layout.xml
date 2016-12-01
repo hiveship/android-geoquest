@@ -11,13 +11,26 @@
         android:id="@+id/Beacon_image"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_height="50dp"
-        android:layout_width="50dp"/>
+        android:layout_height="75dp"
+        android:layout_width="75dp"/>
 
-    <TextView android:text="Name" android:id="@+id/Beacon_name"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </TextView>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView android:text="Name" android:id="@+id/Beacon_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:textSize="24sp">
+        </TextView>
+        <TextView android:text="Name" android:id="@+id/Beacon_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp">
+        </TextView>
+    </LinearLayout>
 
 </LinearLayout>

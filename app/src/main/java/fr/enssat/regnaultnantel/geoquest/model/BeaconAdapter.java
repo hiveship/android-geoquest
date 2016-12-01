@@ -56,10 +56,12 @@ public class BeaconAdapter extends BaseAdapter {
 
         //(2) : Récupération des TextView de notre layout
         TextView name = (TextView)layoutItem.findViewById(R.id.Beacon_name);
+        TextView hint = (TextView)layoutItem.findViewById(R.id.Beacon_hint);
         ImageView imageView = (ImageView) layoutItem.findViewById(R.id.Beacon_image);
 
         //(3) : Renseignement des valeurs
         name.setText(itinerary.getBeacon(position).getName());
+        hint.setText(itinerary.getBeacon(position).getHintString());
         String image = itinerary.getBeacon(position).getHintImage();
         if(image != null){
             byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
