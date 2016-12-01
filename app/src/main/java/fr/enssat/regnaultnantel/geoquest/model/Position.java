@@ -6,7 +6,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import fr.enssat.regnaultnantel.geoquest.activities.GeoQuestMainActivity;
-import fr.enssat.regnaultnantel.geoquest.activities.MainActivity;
 
 import java.util.Observable;
 
