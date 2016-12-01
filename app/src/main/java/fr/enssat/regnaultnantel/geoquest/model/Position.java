@@ -6,11 +6,12 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import fr.enssat.regnaultnantel.geoquest.activities.GeoQuestMainActivity;
-import fr.enssat.regnaultnantel.geoquest.activities.MainActivity;
 
 import java.util.Observable;
 
 public class Position extends Observable{
+    private Location location;
+
     public Position(GeoQuestMainActivity mainActivity) {
         LocationManager locationManager = (LocationManager) mainActivity.getSystemService(Context.LOCATION_SERVICE);
 
@@ -18,6 +19,7 @@ public class Position extends Observable{
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
                 System.out.println(location);
+
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -31,9 +33,9 @@ public class Position extends Observable{
         };
 
         // Register the listener with the Location Manager to receive location updates
-        try {
+        try{
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-        } catch (SecurityException e) {
+        }catch (SecurityException e){
             e.printStackTrace();
         }
     }
