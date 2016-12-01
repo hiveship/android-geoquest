@@ -3,22 +3,21 @@ package fr.enssat.regnaultnantel.geoquest.activities;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import fr.enssat.regnaultnantel.geoquest.R;
 
 import java.io.ByteArrayOutputStream;
 
-import fr.enssat.regnaultnantel.geoquest.R;
-
 public class TakePictureActivity extends AppCompatActivity {
 
-    Button bt;
-    ImageView imageView;
-    Intent cameraIntent;
+    private Button bt;
+    private ImageView imageView;
+    private Intent cameraIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
