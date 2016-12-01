@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import fr.enssat.regnaultnantel.geoquest.R;
+import fr.enssat.regnaultnantel.geoquest.model.Beacon;
 import fr.enssat.regnaultnantel.geoquest.model.BeaconAdapter;
+import fr.enssat.regnaultnantel.geoquest.model.Itinerary;
 
 public class PathEditorActivity extends AppCompatActivity {
 
@@ -15,11 +17,10 @@ public class PathEditorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_path_editor);
 
         ListView lV = (ListView) findViewById(R.id.EditorBeaconList);
-/*
-        try {
-            lV.setAdapter(new BeaconAdapter(this, ));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
+
+        Itinerary i = new Itinerary();
+        i.addBeacon(new Beacon("test","lol",null));
+
+        lV.setAdapter(new BeaconAdapter(this,i));
     }
 }

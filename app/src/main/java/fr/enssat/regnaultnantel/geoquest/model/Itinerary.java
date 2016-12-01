@@ -1,8 +1,25 @@
 package fr.enssat.regnaultnantel.geoquest.model;
 
-public interface Itinerary {
+import java.util.ArrayList;
+import java.util.List;
 
-    int size();
+public class Itinerary {
 
-    Beacon getBeacon(int i);
+    private List<Beacon> beacons;
+
+    public Itinerary(){
+        beacons = new ArrayList<>();
+    }
+
+    public void addBeacon(Beacon B){
+        beacons.add(B);
+    }
+
+    public Beacon getBeacon(int i){
+        return beacons.get(i);
+    }
+
+    public int size(){
+        return beacons.size();
+    }
 }

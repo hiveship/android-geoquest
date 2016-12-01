@@ -1,23 +1,44 @@
 package fr.enssat.regnaultnantel.geoquest.model;
 
+import android.location.Location;
+
 public class Beacon {
 
-    private Hint hint;
+    private String name;
+    private String hintString;
+    private String hintImage;
+    private Location location;
     private boolean reached = false;
 
-    public Hint getHint() {
-        return hint;
+    public Beacon(String name, String hintString,Location location){
+        this(name,hintString,null,location);
     }
 
-    public void setHint(Hint hint) {
-        this.hint = hint;
+    public Beacon(String name, String hintString, String hintImage, Location location) {
+        this.name = name;
+        this.hintString = hintString;
+        this.hintImage = hintImage;
+        this.location = location;
+        this.reached = false;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getHintString() {
+        return hintString;
+    }
+
+    public String getHintImage() {
+        return hintImage;
+    }
+
+    public Location getLocation() {
+        return location;
     }
 
     public boolean isReached() {
         return reached;
-    }
-
-    public void setReached(boolean reached) {
-        this.reached = reached;
     }
 }

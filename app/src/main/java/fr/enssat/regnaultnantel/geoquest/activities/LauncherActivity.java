@@ -37,7 +37,7 @@ public class LauncherActivity extends AppCompatActivity {
     }
 
     public void startEdition(View view) {
-        Intent intent = new Intent(this, TakePictureActivity.class);
+        Intent intent = new Intent(this, PathEditorActivity.class);
         startActivity(intent);
     }
 }
