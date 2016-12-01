@@ -16,21 +16,22 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.TakePictureActivity">
+        <activity android:name=".activities.LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.GeoQuestMainActivity"></activity>
+        <activity android:name=".activities.TakePictureActivity" />
+        <activity android:name=".activities.GeoQuestMainActivity" />
+        <activity android:name=".activities.PathEditorActivity"></activity>
     </application>
 
 </manifest>
