@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class JSONHelper {
 
-    private static final String LOGGER_TAG = "JSONHelper";
+    private static final String LOGGER_TAG = JSONHelper.class.getName();
 
     private static ObjectMapper MAPPER = new ObjectMapper();
 

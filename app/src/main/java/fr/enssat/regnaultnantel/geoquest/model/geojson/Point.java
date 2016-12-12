@@ -7,10 +7,6 @@ public class Point extends GeoJsonObject {
     public Point() {
     }
 
-    public Point(Coordinates coordinates) {
-        this.coordinates = coordinates;
-    }
-
     public Point(double longitude, double latitude) {
         coordinates = new Coordinates(longitude, latitude);
     }

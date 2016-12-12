@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
 
 import fr.enssat.regnaultnantel.geoquest.R;
-import fr.enssat.regnaultnantel.geoquest.model.Position;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
@@ -20,7 +19,6 @@ public class GeoQuestMainActivity extends AppCompatActivity implements Observer 
 
     private double initialLongitude;
     private double initialLatitude;
-    private Position position;
 
     public GeoQuestMainActivity(){
         this.initialLatitude = 48.730031;

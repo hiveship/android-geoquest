@@ -70,7 +70,6 @@ public class BeaconAdapter extends BaseAdapter {
             imageView.setImageBitmap(decodedByte);
         }
 
-
         return layoutItem;
     }
 }

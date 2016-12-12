@@ -1,23 +1,19 @@
 package fr.enssat.regnaultnantel.geoquest.model.geojson;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public abstract class Geometry<T> extends GeoJsonObject {
 
-    private LinkedList<T> coordinates = new LinkedList<>(); // Need to keep order
-
-    @SafeVarargs
-    public Geometry(T... elements) {
-        Collections.addAll(coordinates, elements);
-    }
+    private List<T> coordinates = new ArrayList<>(); // Need to keep order
 
     public Geometry<T> add(T elements) {
         coordinates.add(elements);
         return this;
     }
 
-    public LinkedList<T> getCoordinates() {
+    public List<T> getCoordinates() {
         return coordinates;
     }
 
