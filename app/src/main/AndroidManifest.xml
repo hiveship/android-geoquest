@@ -31,7 +31,8 @@
         </activity>
         <activity android:name=".activities.TakePictureActivity" />
         <activity android:name=".activities.GeoQuestMainActivity" />
-        <activity android:name=".activities.PathEditorActivity"></activity>
+        <activity android:name=".activities.PathEditorActivity" />
+        <activity android:name=".activities.AddPathStep"></activity>
     </application>
 
 </manifest>

@@ -2,6 +2,8 @@ package fr.enssat.regnaultnantel.geoquest.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutCompat;
+
 import fr.enssat.regnaultnantel.geoquest.R;
 import fr.enssat.regnaultnantel.geoquest.model.Position;
 import org.osmdroid.api.IMapController;
@@ -27,7 +29,6 @@ public class GeoQuestMainActivity extends AppCompatActivity implements Observer 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        this.position = new Position(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map);
         mapView = (MapView) findViewById(R.id.map);
@@ -35,7 +36,7 @@ public class GeoQuestMainActivity extends AppCompatActivity implements Observer 
         mapView.setBuiltInZoomControls(true);
         mapController = mapView.getController();
         mapController.setZoom(20);
-
+        this.position = new Position(this);
         GeoPoint initialUserPosition = new GeoPoint(initialLatitude, initialLongitude);
         mapController.setCenter(initialUserPosition);
         //mapView.setUseDataConnection(false);
@@ -49,5 +50,10 @@ public class GeoQuestMainActivity extends AppCompatActivity implements Observer 
         double newLongitude = -1; //TODO
         GeoPoint newUserPosition = new GeoPoint(newLatitude, newLongitude);
         mapController.animateTo(newUserPosition);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 }

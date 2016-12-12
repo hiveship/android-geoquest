@@ -18,13 +18,13 @@
         android:weightSum="1">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="363dp"
+            android:layout_width="154dp"
+            android:layout_height="109dp"
             app:srcCompat="@android:color/background_dark"
             android:id="@+id/imageView"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:layout_weight="0.83" />
+            android:layout_weight="0.05" />
 
         <Button
             android:text="Button"
