@@ -41,6 +41,13 @@ public class AddPathStep extends AppCompatActivity {
             }
         });
 
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveBeaconAndQuit();
+            }
+        });
+
     }
 
     public void takePicture(View v){
@@ -50,9 +57,10 @@ public class AddPathStep extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 42 && resultCode != 0) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
-
+            hintPicture = photo;
+            /**
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            photo.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
+            photo.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             byte[] b = baos.toByteArray();
             String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
 
@@ -61,7 +69,12 @@ public class AddPathStep extends AppCompatActivity {
             byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-            imageView.setImageBitmap(decodedByte);
+            imageView.setImageBitmap(decodedByte);**/
         }
     }
+
+    private void saveBeaconAndQuit(){
+
+    }
+
 }
