@@ -1,13 +1,6 @@
 package fr.enssat.regnaultnantel.geoquest.exceptions;
 
-public class JSONProcessingException extends GeoQuestException {
-
-    /**
-     * Constructs a new JSONProcessingException with default message.
-     */
-    public JSONProcessingException() {
-
-    }
+public class JSONProcessingException extends AbstractGeoQuestException {
 
     /**
      * Constructs a new JSONProcessingException with specified detail message.

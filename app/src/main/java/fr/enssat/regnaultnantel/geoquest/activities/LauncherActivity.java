@@ -8,35 +8,39 @@ import android.widget.Button;
 
 import fr.enssat.regnaultnantel.geoquest.R;
 
+/**
+ * Entry point of the GeoQuest application.
+ */
 public class LauncherActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
-        Button start = (Button)findViewById(R.id.startGameButton);
-        start.setOnClickListener(new View.OnClickListener() {
+
+        Button startGameButton = (Button)findViewById(R.id.startGameButton);
+        startGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startGame(v);
+                startGame();
             }
         });
 
-        Button edit = (Button)findViewById(R.id.editPathButton);
-        edit.setOnClickListener(new View.OnClickListener() {
+        Button pathEditorButton = (Button)findViewById(R.id.editPathButton);
+        pathEditorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startEdition(v);
+                startPathEditor();
             }
         });
     }
 
-    public void startGame(View view) {
-        Intent intent = new Intent(this, MapsActivity.class);
+    private void startGame() {
+        Intent intent = new Intent(this, TestActivity.class);
         startActivity(intent);
     }
 
-    public void startEdition(View view) {
+    private void startPathEditor() {
         Intent intent = new Intent(this, PathEditorActivity.class);
         startActivity(intent);
     }
