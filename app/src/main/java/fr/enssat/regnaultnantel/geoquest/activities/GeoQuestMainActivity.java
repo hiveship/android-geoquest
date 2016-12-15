@@ -1,11 +1,14 @@
 package fr.enssat.regnaultnantel.geoquest.activities;
 
+import android.content.Context;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutCompat;
-
+import android.util.Log;
+import fr.enssat.regnaultnantel.geoquest.LocationListenerImpl;
 import fr.enssat.regnaultnantel.geoquest.R;
-import org.osmdroid.api.IMapController;
+import fr.enssat.regnaultnantel.geoquest.utilities.Constants;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
@@ -14,29 +17,36 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class GeoQuestMainActivity extends AppCompatActivity implements Observer {
-    private IMapController mapController;
+
+    private static final String TAG = GeoQuestMainActivity.class.getName();
+
     private MapView mapView;
 
     private double initialLongitude;
     private double initialLatitude;
 
     public GeoQuestMainActivity(){
-        this.initialLatitude = 48.730031;
-        this.initialLongitude = -3.462632;
+        this.initialLatitude = Constants.DEFAULT_LATITUDE;
+        this.initialLongitude = Constants.DEFAULT_LONGITUDE;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map);
-        mapView = (MapView) findViewById(R.id.map);
+        this.mapView = (MapView) findViewById(R.id.map);
+
         mapView.setTileSource(TileSourceFactory.MAPNIK);
         mapView.setBuiltInZoomControls(true);
-        mapController = mapView.getController();
-        mapController.setZoom(20);
-        this.position = new Position(this);
-        GeoPoint initialUserPosition = new GeoPoint(initialLatitude, initialLongitude);
-        mapController.setCenter(initialUserPosition);
+        mapView.setMultiTouchControls(true);
+        mapView.getController().setZoom(Constants.DEFAULT_MAP_ZOOM);
+
+        LocationManager lm;
+        LocationListener ll = new LocationListenerImpl();
+        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, ll);
+
+        mapView.getController().setCenter(new GeoPoint(initialLatitude, initialLongitude));
         //mapView.setUseDataConnection(false);
     }
 
@@ -44,10 +54,11 @@ public class GeoQuestMainActivity extends AppCompatActivity implements Observer 
     @Override
     public void update(Observable o, Object arg) {
         // TODO: Récupérer la nouvelle position GPS
+        Log.d(TAG, "on update");
         double newLatitude = -1; //TODO
         double newLongitude = -1; //TODO
         GeoPoint newUserPosition = new GeoPoint(newLatitude, newLongitude);
-        mapController.animateTo(newUserPosition);
+        mapView.getController().animateTo(newUserPosition);
     }
 
     @Override
