@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">GeoQuest</string>
-    <string name="title_activity_test">test</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
