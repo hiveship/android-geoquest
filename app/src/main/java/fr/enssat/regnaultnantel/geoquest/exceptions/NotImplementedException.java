@@ -3,7 +3,7 @@ package fr.enssat.regnaultnantel.geoquest.exceptions;
 /**
  * Thrown to indicate that a block of code has not been implemented.
  */
-public class NotImplementedException extends AbstractGeoQuestException {
+public class NotImplementedException extends AbstractGeoQuestCheckedException {
 
     /**
      * Constructs a new NotImplementedException with specified detail message.

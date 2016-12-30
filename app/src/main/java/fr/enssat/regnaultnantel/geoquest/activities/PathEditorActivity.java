@@ -24,9 +24,9 @@ public class PathEditorActivity extends AppCompatActivity {
         Beacon beacon = new Beacon();
         beacon.setHintString("indice 1");
         beacon.setName("Name 1");
-        i.addBeacon(beacon);
+        i.getBeacons().add(beacon);
 
-        listView.setAdapter(new BeaconAdapter(this,i));
+        listView.setAdapter(new BeaconAdapter(this, i));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -37,7 +37,7 @@ public class PathEditorActivity extends AppCompatActivity {
         });
     }
 
-    public void addStep(View view){
+    public void addStep(View view) {
         Intent intent = new Intent(this, AddPathStep.class);
         startActivity(intent);
     }

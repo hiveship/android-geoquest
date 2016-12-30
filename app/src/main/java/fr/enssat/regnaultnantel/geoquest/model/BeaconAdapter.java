@@ -12,9 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import fr.enssat.regnaultnantel.geoquest.R;
-
 
 public class BeaconAdapter extends BaseAdapter {
 
@@ -22,7 +20,7 @@ public class BeaconAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mInflater;
 
-    public BeaconAdapter(Context context, Itinerary itinerary){
+    public BeaconAdapter(Context context, Itinerary itinerary) {
         mContext = context;
         this.itinerary = itinerary;
         mInflater = LayoutInflater.from(mContext);
@@ -30,12 +28,12 @@ public class BeaconAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return itinerary.size();
+        return itinerary.getBeacons().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return itinerary.getBeacon(position);
+        return itinerary.getBeacons().get(position);
     }
 
     @Override
@@ -55,15 +53,15 @@ public class BeaconAdapter extends BaseAdapter {
         }
 
         //(2) : Récupération des TextView de notre layout
-        TextView name = (TextView)layoutItem.findViewById(R.id.Beacon_name);
-        TextView hint = (TextView)layoutItem.findViewById(R.id.Beacon_hint);
+        TextView name = (TextView) layoutItem.findViewById(R.id.Beacon_name);
+        TextView hint = (TextView) layoutItem.findViewById(R.id.Beacon_hint);
         ImageView imageView = (ImageView) layoutItem.findViewById(R.id.Beacon_image);
 
         //(3) : Renseignement des valeurs
-        name.setText(itinerary.getBeacon(position).getName());
-        hint.setText(itinerary.getBeacon(position).getHintString());
-        String image = itinerary.getBeacon(position).getHintImage();
-        if(image != null){
+        name.setText(itinerary.getBeacons().get(position).getName());
+        hint.setText(itinerary.getBeacons().get(position).getHintString());
+        String image = itinerary.getBeacons().get(position).getHintImage();
+        if (image != null) {
             byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 

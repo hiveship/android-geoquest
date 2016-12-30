@@ -1,5 +1,6 @@
 package fr.enssat.regnaultnantel.geoquest.model;
 
+
 import android.location.Location;
 
 /**
