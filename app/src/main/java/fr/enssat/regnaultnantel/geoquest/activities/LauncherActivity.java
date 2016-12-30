@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import fr.enssat.regnaultnantel.geoquest.R;
+import fr.enssat.regnaultnantel.geoquest.model.Itinerary;
+import fr.enssat.regnaultnantel.geoquest.model.ItineraryRepository;
 import fr.enssat.regnaultnantel.geoquest.utilities.Constants;
 
 /**
@@ -39,6 +41,12 @@ public class LauncherActivity extends AbstractGeoQuestActivity {
 
         // TODO: Récupérer un nom d'itineraire avec un start activity for result
         String itineraryName = "todo";
+        ItineraryRepository repository = new ItineraryRepository(getApplicationContext());
+       // repository.getDefaultItinerary();
+
+        repository.save(new Itinerary());
+
+
         intent.putExtra(Constants.ITINERARY_INTENT_PARAM, itineraryName);
 
         startActivity(intent);

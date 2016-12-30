@@ -9,6 +9,7 @@ import fr.enssat.regnaultnantel.geoquest.exceptions.JSONProcessingException;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 public class JSONHelper {
 
@@ -33,6 +34,15 @@ public class JSONHelper {
     public static <T> T fromJSON(String jsonString, Class<T> valueType) throws JSONProcessingException {
         try {
             return MAPPER.readValue(jsonString, valueType);
+        } catch (IOException e) {
+            Log.e(LOGGER_TAG, ExceptionUtils.getStackTrace(e));
+            throw new JSONProcessingException("Error while unmarshalling " + valueType, e);
+        }
+    }
+
+    public static <T> T fromJSON(InputStream jsonStream, Class<T> valueType) throws JSONProcessingException {
+        try {
+            return MAPPER.readValue(jsonStream, valueType);
         } catch (IOException e) {
             Log.e(LOGGER_TAG, ExceptionUtils.getStackTrace(e));
             throw new JSONProcessingException("Error while unmarshalling " + valueType, e);

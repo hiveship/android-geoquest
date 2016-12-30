@@ -9,6 +9,7 @@ import java.util.List;
 public class Itinerary {
     private static final String TAG = Itinerary.class.getCanonicalName();
 
+    private String name;
     private List<Beacon> beacons;
     private int step = 0;
 
@@ -40,5 +41,13 @@ public class Itinerary {
 
     public void setStep(int step) {
         this.step = step;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
