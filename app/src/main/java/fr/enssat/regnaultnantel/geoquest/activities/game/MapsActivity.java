@@ -1,4 +1,4 @@
-package fr.enssat.regnaultnantel.geoquest.activities;
+package fr.enssat.regnaultnantel.geoquest.activities.game;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -69,7 +69,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //TODO: A tester que ça marche
     private void displayEndGameDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Congrats !");
         builder.setMessage("Game finished !");
         builder.create().show();
@@ -133,7 +133,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         if (!gameData.isFinish()) {
             Beacon currentBeacon = gameData.getCurrentBeacon();
-            float distance = location.distanceTo(currentBeacon.getLocation()); // in meters
+            float distance = location.distanceTo(currentBeacon.getCoordinates().toLocation()); // in meters
             Log.d(TAG, "Distance to next step is " + distance + " meters");
             if (distance < Constants.SECURITY_DISTANCE_METERS) {
                 try {

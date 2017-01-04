@@ -6,8 +6,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical"
               android:paddingTop="?android:attr/actionBarSize"
-              tools:context="fr.enssat.regnaultnantel.geoquest.activities.MapsActivity">
-
+              tools:context="fr.enssat.regnaultnantel.geoquest.activities.game.MapsActivity">
 
     <LinearLayout
             android:id="@+id/linear_beacon_hint"
@@ -23,7 +22,6 @@
                 android:layout_weight="1"/>
 
         <TextView
-                android:text="TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/hintString"

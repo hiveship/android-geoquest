@@ -1,7 +1,6 @@
 package fr.enssat.regnaultnantel.geoquest.model;
 
 import android.content.Context;
-import android.location.Location;
 import android.os.Environment;
 import android.util.Log;
 import fr.enssat.regnaultnantel.geoquest.R;
@@ -29,17 +28,17 @@ public class ItineraryRepository {
 
         Beacon fake1 = new Beacon();
         fake1.setHintString("la mie caline");
-        Location targetLocation = new Location("");
-        targetLocation.setLatitude(48.731483);
-        targetLocation.setLongitude(-3.460341);
-        fake1.setLocation(targetLocation);
+        Coordinates coordinates = new Coordinates();
+        coordinates.setLatitude(48.731483);
+        coordinates.setLongitude(-3.460341);
+        fake1.setCoordinates(coordinates);
 
         Beacon fake2 = new Beacon();
-        fake1.setHintString("leclerc perros");
-        Location targetLocation2 = new Location("");
-        targetLocation2.setLatitude(48.725448);
-        targetLocation2.setLongitude(-3.449291);
-        fake2.setLocation(targetLocation2);
+        fake2.setHintString("leclerc perros");
+        Coordinates coordinates2 = new Coordinates();
+        coordinates2.setLatitude(48.725448);
+        coordinates2.setLongitude(-3.449291);
+        fake2.setCoordinates(coordinates2);
 
         itinerary.getBeacons().add(fake1);
         itinerary.getBeacons().add(fake2);
@@ -51,18 +50,17 @@ public class ItineraryRepository {
 
         Beacon fake1 = new Beacon();
         fake1.setHintString("la mie caline");
-        Location targetLocation = new Location("");
-        targetLocation.setLatitude(48.731483);
-        targetLocation.setLongitude(-3.460341);
-        fake1.setLocation(targetLocation);
+        Coordinates coordinates = new Coordinates();
+        coordinates.setLatitude(48.731483);
+        coordinates.setLongitude(-3.460341);
+        fake1.setCoordinates(coordinates);
 
         Beacon fake2 = new Beacon();
-        fake1.setHintString("leclerc perros");
-        fake1.setHintImage("ffff");
-        Location targetLocation2 = new Location("");
-        targetLocation2.setLatitude(48.725448);
-        targetLocation2.setLongitude(-3.449291);
-        fake2.setLocation(targetLocation2);
+        fake2.setHintString("leclerc perros");
+        Coordinates coordinates2 = new Coordinates();
+        coordinates2.setLatitude(48.725448);
+        coordinates2.setLongitude(-3.449291);
+        fake2.setCoordinates(coordinates2);
 
         itinerary.getBeacons().add(fake1);
         itinerary.getBeacons().add(fake2);
@@ -75,10 +73,9 @@ public class ItineraryRepository {
         }
         File file = new File(dir, "filename");
 
-        try {
-            FileOutputStream f = new FileOutputStream(file);
+        try (FileOutputStream f = new FileOutputStream(file);) {
             String jsonString = JSONHelper.toJSON(itinerary);
-            Log.d(TAG,jsonString);
+            Log.d(TAG, jsonString);
             f.write(jsonString.getBytes());
         } catch (Exception e) {
             e.printStackTrace();

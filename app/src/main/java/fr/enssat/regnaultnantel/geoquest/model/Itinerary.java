@@ -1,6 +1,7 @@
 package fr.enssat.regnaultnantel.geoquest.model;
 
 import android.util.Log;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import fr.enssat.regnaultnantel.geoquest.exceptions.ItineraryCompleteException;
 
 import java.util.ArrayList;
@@ -11,12 +12,14 @@ public class Itinerary {
 
     private String name;
     private List<Beacon> beacons;
+    @JsonIgnore
     private int step = 0;
 
     public Itinerary() {
         beacons = new ArrayList<>();
     }
 
+    @JsonIgnore
     public Beacon getNextStep() throws ItineraryCompleteException {
         if (step <= beacons.size()) {
             Beacon next = beacons.get(step);

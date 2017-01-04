@@ -1,20 +1,21 @@
 {
-  "type": "FeatureCollection",
-  "features": [
+  "beacons": [
     {
-      "type": "Feature",
-      "properties": {
-        "name": "Stade de Bel Air",
-        "indice": "Un espace sportif après une longue montée depuis le centre de Lannion !",
-        "image_url": "http://www.letelegramme.fr/ar/imgproxy.php/PhotoIntuitions/2016/04/20/douze-etudiants-de-2e-annee-d-informatique-de-l-enssat-dont_2859802_528x397.jpg?v=1&article=20160420-1011037801&aaaammjj=20160420"
+      "coordinates": {
+        "latitude": 48.731483,
+        "longitude": -3.460341
       },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -3.4769153594970703,
-          48.72391072616036
-        ]
-      }
+      "hintString": "la mie caline",
+      "reached": false
+    },
+    {
+      "coordinates": {
+        "latitude": 48.725448,
+        "longitude": -3.449291
+      },
+      "hintString": "leclerc perros",
+      "reached": false
     }
-  ]
+  ],
+  "name": "03ca4635-0911-4920-86df-0ecbde79ad66"
 }

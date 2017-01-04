@@ -6,7 +6,7 @@
     android:id="@+id/activity_add_path_step"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fr.enssat.regnaultnantel.geoquest.activities.AddPathStep"
+    tools:context="fr.enssat.regnaultnantel.geoquest.activities.editor.AddPathStep"
     android:weightSum="1">
 
     <GridLayout

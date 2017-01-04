@@ -29,8 +29,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activities.PathEditorActivity" />
-        <activity android:name=".activities.AddPathStep" />
+        <activity android:name=".activities.editor.PathEditorActivity" />
+        <activity android:name=".activities.editor.AddPathStep" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -44,7 +44,7 @@
                 android:value="@string/google_maps_key"/>
 
         <activity
-                android:name=".activities.MapsActivity"
+                android:name=".activities.game.MapsActivity"
                 android:label="@string/title_activity_maps">
         </activity>
     </application>

@@ -1,4 +1,4 @@
-package fr.enssat.regnaultnantel.geoquest.activities;
+package fr.enssat.regnaultnantel.geoquest.activities.editor;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import fr.enssat.regnaultnantel.geoquest.R;
+import fr.enssat.regnaultnantel.geoquest.activities.AbstractGeoQuestActivity;
 
 public class AddPathStep extends AbstractGeoQuestActivity {
 

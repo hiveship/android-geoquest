@@ -1,8 +1,6 @@
 package fr.enssat.regnaultnantel.geoquest.model;
 
 
-import android.location.Location;
-
 /**
  * A beacon represents a step in the GeoQuest game.
  */
@@ -11,7 +9,7 @@ public class Beacon {
     private String name;
     private String hintString;
     private String hintImage;
-    private Location location;
+    private Coordinates coordinates;
     private boolean reached = false;
 
     public String getName() {
@@ -35,8 +33,12 @@ public class Beacon {
     /**
      * Returns the GPS coordinates of the current beacon.
      */
-    public Location getLocation() {
-        return location;
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
     }
 
     /**
@@ -58,11 +60,9 @@ public class Beacon {
         this.hintImage = hintImage;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
     public void setReached(boolean reached) {
         this.reached = reached;
     }
+
+
 }
