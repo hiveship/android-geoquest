@@ -7,8 +7,11 @@ import fr.enssat.regnaultnantel.geoquest.R;
 import fr.enssat.regnaultnantel.geoquest.utilities.Constants;
 import fr.enssat.regnaultnantel.geoquest.utilities.JSONHelper;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
 
@@ -46,6 +49,29 @@ public class ItineraryRepository {
         return itinerary;
     }
 
+    //TODO: Refactor this
+    public Itinerary loadTmp(String itineraryName) throws IOException {
+        File sdcard = Environment.getExternalStorageDirectory();
+
+        //Get the text file
+        File file = new File(sdcard + Constants.GEO_QUEST_SD_CARD_DIRECTORY,  itineraryName + ".json");
+
+        //Read text from file
+        StringBuilder text = new StringBuilder();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(file));){
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                text.append(line);
+              //  text.append('\n');
+            }
+            Log.d(TAG, "@@@@@@@@@@@@@ text = " + text);
+            br.close();
+            return JSONHelper.fromJSON(text.toString(), Itinerary.class);
+        }
+    }
+
     public void save(Itinerary itinerary) {
 
         Beacon fake1 = new Beacon();
@@ -62,6 +88,8 @@ public class ItineraryRepository {
         coordinates2.setLongitude(-3.449291);
         fake2.setCoordinates(coordinates2);
 
+        itinerary.setName("saved.json");
+
         itinerary.getBeacons().add(fake1);
         itinerary.getBeacons().add(fake2);
 
@@ -71,7 +99,7 @@ public class ItineraryRepository {
         if (itinerary.getName() == null) {
             itinerary.setName(UUID.randomUUID().toString());
         }
-        File file = new File(dir, "filename");
+        File file = new File(dir, itinerary.getName());
 
         try (FileOutputStream f = new FileOutputStream(file);) {
             String jsonString = JSONHelper.toJSON(itinerary);
