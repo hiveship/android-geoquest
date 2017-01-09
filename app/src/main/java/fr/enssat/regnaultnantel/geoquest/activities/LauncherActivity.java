@@ -8,8 +8,6 @@ import android.widget.Button;
 import fr.enssat.regnaultnantel.geoquest.R;
 import fr.enssat.regnaultnantel.geoquest.activities.editor.PathEditorActivity;
 import fr.enssat.regnaultnantel.geoquest.activities.game.MapsActivity;
-import fr.enssat.regnaultnantel.geoquest.model.Itinerary;
-import fr.enssat.regnaultnantel.geoquest.model.ItineraryRepository;
 import fr.enssat.regnaultnantel.geoquest.utilities.Constants;
 
 /**
@@ -17,55 +15,54 @@ import fr.enssat.regnaultnantel.geoquest.utilities.Constants;
  */
 public class LauncherActivity extends AbstractGeoQuestActivity {
 
-    private static final String TAG = LauncherActivity.class.getCanonicalName();
+    private static final int START_GET_ITINERARY = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
 
-        Button startGameButton = (Button) findViewById(R.id.startGameButton);
-        startGameButton.setOnClickListener(new View.OnClickListener() {
+        Button gameButton = (Button) findViewById(R.id.startGameButton);
+        gameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startGame();
+                askForItinerary();
             }
         });
 
-        Button pathEditorButton = (Button) findViewById(R.id.editPathButton);
-        pathEditorButton.setOnClickListener(new View.OnClickListener() {
+        Button editorButton = (Button) findViewById(R.id.editPathButton);
+        editorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startPathEditor();
             }
         });
+
+        Log.d(TAG, "GeoQuest Application successfully started !");
     }
 
-    private void startGame() {
+    private void askForItinerary() {
+        startActivityForResult(new Intent(this, ItineraryListActivity.class), START_GET_ITINERARY);
+    }
+
+    private void startGame(String itinerary) {
         Intent intent = new Intent(this, MapsActivity.class);
-
-        // TODO: Récupérer un nom d'itineraire avec un start activity for result
-        String itineraryName = "todo";
-        ItineraryRepository repository = new ItineraryRepository(this);
-
-        repository.save(new Itinerary());
-        Itinerary foo = repository.getDefaultItinerary();
-        Log.d(TAG, "foo." + foo.getName() + " has " + foo.getBeacons().size()+ " beacons");
-
-        try {
-            Itinerary loaded = repository.loadTmp("saved");
-            Log.d(TAG, "#################### " + loaded);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        intent.putExtra(Constants.ITINERARY_INTENT_PARAM, itineraryName);
-
+        intent.putExtra(Constants.ITINERARY_INTENT_PARAM, itinerary);
         startActivity(intent);
     }
 
     private void startPathEditor() {
         Intent intent = new Intent(this, PathEditorActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == START_GET_ITINERARY && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            String itineraryName = (String) extras.get(Constants.ITINERARY_INTENT_PARAM);
+            Log.d(TAG, "Going to start game for itinerary name = " + itineraryName);
+            startGame(itineraryName);
+        }
     }
 }

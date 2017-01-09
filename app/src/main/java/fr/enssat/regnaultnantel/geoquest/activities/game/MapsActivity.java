@@ -8,7 +8,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.util.Base64;
 import android.util.Log;
@@ -21,6 +20,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import fr.enssat.regnaultnantel.geoquest.R;
+import fr.enssat.regnaultnantel.geoquest.activities.AbstractGeoQuestActivity;
 import fr.enssat.regnaultnantel.geoquest.exceptions.ItineraryCompleteException;
 import fr.enssat.regnaultnantel.geoquest.model.Beacon;
 import fr.enssat.regnaultnantel.geoquest.model.GameData;
@@ -29,12 +29,14 @@ import fr.enssat.regnaultnantel.geoquest.model.ItineraryRepository;
 import fr.enssat.regnaultnantel.geoquest.utilities.Constants;
 
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
+public class MapsActivity extends AbstractGeoQuestActivity implements OnMapReadyCallback, LocationListener {
 
     private static final String TAG = MapsActivity.class.getCanonicalName();
 
+    private LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+    private ItineraryRepository itineraryRepository = new ItineraryRepository(this);
+
     private GoogleMap map;
-    private LocationManager locationManager;
     private GameData gameData;
 
     // ===================
@@ -45,8 +47,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Itinerary itinerary = ItineraryRepository.load(getIntent().getStringExtra(Constants.ITINERARY_INTENT_PARAM));
+        String itineraryName = getIntent().getStringExtra(Constants.ITINERARY_INTENT_PARAM);
+        Itinerary itinerary = getItinerary(itineraryName);
         this.gameData = new GameData(itinerary);
 
         setContentView(R.layout.activity_maps);
@@ -54,6 +56,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+    }
+
+    private Itinerary getItinerary(String itineraryName) {
+        Itinerary itinerary;
+        if (itineraryName == null) {
+            itinerary = itineraryRepository.load(itineraryName);
+        } else {
+            itinerary = itineraryRepository.getDefaultItinerary();
+        }
+        return itinerary;
     }
 
     @Override

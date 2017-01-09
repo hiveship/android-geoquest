@@ -19,7 +19,7 @@
                 android:layout_width="70dp"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/hintImage"
-                android:layout_weight="1"/>
+                android:layout_weight="1" android:contentDescription="@string/image_de_l_indice"/>
 
         <TextView
                 android:layout_width="match_parent"

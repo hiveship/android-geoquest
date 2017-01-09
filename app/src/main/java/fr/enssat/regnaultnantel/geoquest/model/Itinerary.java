@@ -5,12 +5,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import fr.enssat.regnaultnantel.geoquest.exceptions.ItineraryCompleteException;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Itinerary {
     private static final String TAG = Itinerary.class.getCanonicalName();
 
     private String name;
+    private Date creationDate;
     private List<Beacon> beacons;
     @JsonIgnore
     private int step = 0;
@@ -52,5 +54,13 @@ public class Itinerary {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 }
