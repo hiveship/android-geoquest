@@ -6,8 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import fr.enssat.regnaultnantel.geoquest.R;
-import fr.enssat.regnaultnantel.geoquest.activities.editor.PathEditorActivity;
-import fr.enssat.regnaultnantel.geoquest.activities.game.MapsActivity;
 import fr.enssat.regnaultnantel.geoquest.utilities.Constants;
 
 /**
@@ -58,6 +56,7 @@ public class LauncherActivity extends AbstractGeoQuestActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d(TAG, "onActivityResult with request code = " + requestCode);
         if (requestCode == START_GET_ITINERARY && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             String itineraryName = (String) extras.get(Constants.ITINERARY_INTENT_PARAM);

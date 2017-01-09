@@ -6,7 +6,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical"
               android:paddingTop="?android:attr/actionBarSize"
-              tools:context="fr.enssat.regnaultnantel.geoquest.activities.game.MapsActivity">
+              tools:context="fr.enssat.regnaultnantel.geoquest.activities.MapsActivity">
 
     <LinearLayout
             android:id="@+id/linear_beacon_hint"

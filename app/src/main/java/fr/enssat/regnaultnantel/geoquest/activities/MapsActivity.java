@@ -1,4 +1,4 @@
-package fr.enssat.regnaultnantel.geoquest.activities.game;
+package fr.enssat.regnaultnantel.geoquest.activities;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -20,7 +20,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import fr.enssat.regnaultnantel.geoquest.R;
-import fr.enssat.regnaultnantel.geoquest.activities.AbstractGeoQuestActivity;
 import fr.enssat.regnaultnantel.geoquest.exceptions.ItineraryCompleteException;
 import fr.enssat.regnaultnantel.geoquest.model.Beacon;
 import fr.enssat.regnaultnantel.geoquest.model.GameData;
@@ -31,9 +30,7 @@ import fr.enssat.regnaultnantel.geoquest.utilities.Constants;
 
 public class MapsActivity extends AbstractGeoQuestActivity implements OnMapReadyCallback, LocationListener {
 
-    private static final String TAG = MapsActivity.class.getCanonicalName();
-
-    private LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+    private LocationManager locationManager;
     private ItineraryRepository itineraryRepository = new ItineraryRepository(this);
 
     private GoogleMap map;
@@ -46,6 +43,7 @@ public class MapsActivity extends AbstractGeoQuestActivity implements OnMapReady
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         String itineraryName = getIntent().getStringExtra(Constants.ITINERARY_INTENT_PARAM);
         Itinerary itinerary = getItinerary(itineraryName);

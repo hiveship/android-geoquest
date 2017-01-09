@@ -1,4 +1,4 @@
-package fr.enssat.regnaultnantel.geoquest.activities.editor;
+package fr.enssat.regnaultnantel.geoquest.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import fr.enssat.regnaultnantel.geoquest.R;
-import fr.enssat.regnaultnantel.geoquest.activities.AbstractGeoQuestActivity;
 
 public class AddPathStep extends AbstractGeoQuestActivity {
 
@@ -21,7 +20,7 @@ public class AddPathStep extends AbstractGeoQuestActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_path_step);
+        setContentView(R.layout.add_beacon);
         hintPicture = null;
 
         cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);

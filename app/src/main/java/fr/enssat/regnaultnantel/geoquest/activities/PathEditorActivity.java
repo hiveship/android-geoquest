@@ -1,4 +1,4 @@
-package fr.enssat.regnaultnantel.geoquest.activities.editor;
+package fr.enssat.regnaultnantel.geoquest.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
