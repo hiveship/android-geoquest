@@ -23,7 +23,7 @@ public class ItineraryListActivity extends AbstractGeoQuestActivity implements A
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.itinerary_list);
+        setContentView(R.layout.itineraries);
         listView = (ListView) findViewById(R.id.itineraryListView);
         itineraries = itineraryRepository.getAll();
 

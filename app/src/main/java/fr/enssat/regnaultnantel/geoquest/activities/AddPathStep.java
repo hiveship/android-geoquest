@@ -20,7 +20,7 @@ public class AddPathStep extends AbstractGeoQuestActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_beacon);
+        setContentView(R.layout.activity_add_path_step);
         hintPicture = null;
 
         cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);

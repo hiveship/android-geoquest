@@ -59,7 +59,8 @@ public class MapsActivity extends AbstractGeoQuestActivity implements OnMapReady
     private Itinerary getItinerary(String itineraryName) {
         Itinerary itinerary;
         if (itineraryName == null) {
-            itinerary = itineraryRepository.load(itineraryName);
+           // itinerary = itineraryRepository.load(itineraryName); FIXME
+            itinerary = itineraryRepository.getDefaultItinerary();
         } else {
             itinerary = itineraryRepository.getDefaultItinerary();
         }
@@ -91,7 +92,6 @@ public class MapsActivity extends AbstractGeoQuestActivity implements OnMapReady
             textView.setText(R.string.game_finish);
         } else {
             textView.setText(gameData.getCurrentBeacon().getHintString());
-            Log.d(TAG, "update hint string to -> " + gameData.getCurrentBeacon().getHintString());
         }
         textView.setVisibility(View.VISIBLE);
 
@@ -104,6 +104,8 @@ public class MapsActivity extends AbstractGeoQuestActivity implements OnMapReady
             imageView.setVisibility(View.VISIBLE);
         }
     }
+
+    //TODO: ALERT DIALOG QUAND UN BEACON EST REACHE + MISE A JOUR DE LIMAGE EN PLUS DU TEXT VIEW
 
     // =====================
     // ON MAP READY CALLBACK
