@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -25,13 +24,15 @@ import fr.enssat.regnaultnantel.geoquest.model.Beacon;
 import fr.enssat.regnaultnantel.geoquest.model.GameSessionData;
 import fr.enssat.regnaultnantel.geoquest.model.Itinerary;
 import fr.enssat.regnaultnantel.geoquest.model.ItineraryRepository;
+import fr.enssat.regnaultnantel.geoquest.utilities.AbstractLocationListenerImpl;
 import fr.enssat.regnaultnantel.geoquest.utilities.Constants;
 import fr.enssat.regnaultnantel.geoquest.utilities.GlobalUtils;
 
-public class GameActivity extends AbstractGeoQuestActivity implements OnMapReadyCallback, LocationListener {
+public class GameActivity extends AbstractGeoQuestActivity implements OnMapReadyCallback {
 
     private LocationManager locationManager;
     private ItineraryRepository itineraryRepository = new ItineraryRepository(this);
+    private AbstractLocationListenerImpl locationListener;
 
     private GoogleMap map;
     private LinearLayout layoutHintView;
@@ -48,6 +49,7 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         hintStringView = (TextView) findViewById(R.id.hintString);
         hintImageView = (ImageView) findViewById(R.id.hintImage);
@@ -56,6 +58,13 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
         String itineraryName = getIntent().getStringExtra(Constants.ITINERARY_INTENT_PARAM);
         Itinerary itinerary = getItinerary(itineraryName);
         this.game = new GameSessionData(itinerary);
+
+        this.locationListener = new AbstractLocationListenerImpl() {
+            @Override
+            public void onLocationChanged(Location location) {
+                onLocationChanged(location);
+            }
+        };
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -66,13 +75,13 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
     protected void onPause() {
         super.onPause();
         // Don't query for location updates if the activity is not active (battery...)
-        locationManager.removeUpdates(this);
+        locationManager.removeUpdates(locationListener);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        locationManager.requestLocationUpdates(locationManager.getBestProvider(new Criteria(), false), 0, 0, this);
+        locationManager.requestLocationUpdates(locationManager.getBestProvider(new Criteria(), false), 0, 0, locationListener);
     }
 
     // ==================
@@ -172,7 +181,6 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
     // LOCATION LISTENIR IMPL
     // ======================
 
-    @Override
     public void onLocationChanged(Location location) {
         Log.d(TAG, "Location changed. Lat = " + location.getLatitude() + " | Lon = " + location.getLongitude());
         this.map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), Constants.DEFAULT_MAP_ZOOM));
@@ -198,18 +206,4 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
         }
     }
 
-    @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {
-        // Don't need this event, just ignore it
-    }
-
-    @Override
-    public void onProviderEnabled(String s) {
-        // Don't need this event, just ignore it
-    }
-
-    @Override
-    public void onProviderDisabled(String s) {
-        // Don't need this event, just ignore it
-    }
 }
