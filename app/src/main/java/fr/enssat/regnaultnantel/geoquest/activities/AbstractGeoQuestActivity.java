@@ -9,4 +9,5 @@ public abstract class AbstractGeoQuestActivity extends AppCompatActivity {
      */
     protected static final String TAG = LauncherActivity.class.getCanonicalName();
 
+    //TODO: Faire menu dans cette classe
 }
