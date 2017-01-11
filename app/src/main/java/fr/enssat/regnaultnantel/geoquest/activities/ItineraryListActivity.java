@@ -32,7 +32,6 @@ public class ItineraryListActivity extends AbstractGeoQuestActivity implements A
         listView.setOnItemClickListener(this);
     }
 
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(this, LauncherActivity.class);

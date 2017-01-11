@@ -48,7 +48,7 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_game);
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         hintStringView = (TextView) findViewById(R.id.hintString);
@@ -151,7 +151,7 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
             layoutHintView.setBackgroundColor(getResources().getColor(R.color.beaconFar));
         }
     }
-    
+
     // =====================
     // ON MAP READY CALLBACK
     // =====================
