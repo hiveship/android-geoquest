@@ -33,7 +33,7 @@
         <activity android:name=".activities.PathEditorActivity" />
         <activity android:name=".activities.AddPathStep"/>
         <activity android:name=".activities.ItineraryListActivity" />
-        <activity android:name=".activities.MapsActivity"/>
+        <activity android:name=".activities.GameActivity"/>
 
         <!-- The API key for Google Maps-based APIs -->
         <meta-data

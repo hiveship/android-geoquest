@@ -44,7 +44,7 @@ public class LauncherActivity extends AbstractGeoQuestActivity {
     }
 
     private void startGame(String itinerary) {
-        Intent intent = new Intent(this, MapsActivity.class);
+        Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(Constants.ITINERARY_INTENT_PARAM, itinerary);
         startActivity(intent);
     }

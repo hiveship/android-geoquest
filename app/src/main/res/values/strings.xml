@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">GeoQuest</string>
     <string name="title_activity_maps">Map</string>
-    <string name="game_finish">The game is finished !</string>
-    <string name="image_de_l_indice">Image de l\'indice</string>
+    <string name="game_finish">Partie terminée !</string>
+    <string name="imageViewHint">Image associée à l\'indice</string>
+    <string name="finish_beacon">Vous venez d\'atteindre l\'étape courrante ! Passez à la suite ;)</string>
+    <string name="congrats">Félicitations</string>
+    <string name="game_finish_dialog_button">Revenir au menu principal</string>
 </resources>

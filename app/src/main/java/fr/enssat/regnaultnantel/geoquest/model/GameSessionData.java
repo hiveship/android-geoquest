@@ -2,13 +2,13 @@ package fr.enssat.regnaultnantel.geoquest.model;
 
 import fr.enssat.regnaultnantel.geoquest.exceptions.ItineraryCompleteException;
 
-public class GameData {
+public class GameSessionData {
 
     private boolean finish;
     private Beacon currentBeacon;
     private Itinerary itinerary;
 
-    public GameData(Itinerary itinerary) {
+    public GameSessionData(Itinerary itinerary) {
         this.itinerary = itinerary;
         try {
             this.currentBeacon = itinerary.getNextStep();

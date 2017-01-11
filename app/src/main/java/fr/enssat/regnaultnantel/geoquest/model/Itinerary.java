@@ -23,7 +23,7 @@ public class Itinerary {
 
     @JsonIgnore
     public Beacon getNextStep() throws ItineraryCompleteException {
-        if (step <= beacons.size()) {
+        if (step < beacons.size()) {
             Beacon next = beacons.get(step);
             step++;
             Log.d(TAG, "step ++");
