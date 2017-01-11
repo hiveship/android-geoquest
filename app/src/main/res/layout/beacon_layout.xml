@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/LL_Fond">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="horizontal" android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/LL_Fond">
 
 
     <ImageView
-        app:srcCompat="@android:color/background_dark"
-        android:id="@+id/Beacon_image"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_height="75dp"
-        android:layout_width="75dp"/>
+            app:srcCompat="@android:color/background_dark"
+            android:id="@+id/Beacon_image"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_height="75dp"
+            android:layout_width="75dp"/>
 
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <TextView android:text="Name" android:id="@+id/Beacon_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:textSize="24sp">
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:fontFamily="sans-serif"
+                  android:textSize="24sp">
         </TextView>
         <TextView android:text="Name" android:id="@+id/Beacon_hint"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp">
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textSize="18sp">
         </TextView>
     </LinearLayout>
 

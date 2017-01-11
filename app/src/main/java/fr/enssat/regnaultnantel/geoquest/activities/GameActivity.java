@@ -91,9 +91,9 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
     private Itinerary getItinerary(String itineraryName) {
         Itinerary itinerary;
         if (itineraryName == null) {
-            // itinerary = itineraryRepository.load(itineraryName); FIXME
             itinerary = itineraryRepository.getDefaultItinerary();
         } else {
+            // itinerary = itineraryRepository.load(itineraryName); FIXME
             itinerary = itineraryRepository.getDefaultItinerary();
         }
         return itinerary;
@@ -151,9 +151,7 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
             layoutHintView.setBackgroundColor(getResources().getColor(R.color.beaconFar));
         }
     }
-
-    //TODO: MISE A JOUR DE LIMAGE EN PLUS DU TEXT VIEW
-
+    
     // =====================
     // ON MAP READY CALLBACK
     // =====================
