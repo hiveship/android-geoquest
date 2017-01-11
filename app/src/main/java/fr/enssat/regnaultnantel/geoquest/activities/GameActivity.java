@@ -62,7 +62,7 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
         this.locationListener = new AbstractLocationListenerImpl() {
             @Override
             public void onLocationChanged(Location location) {
-                onLocationChanged(location);
+                updateLocation(location);
             }
         };
 
@@ -120,7 +120,10 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
         builder.create().show();
     }
 
-    private void updateView() {
+    /**
+     * Update the widgets associated to the current beacon's hint.
+     */
+    private void updateHintView() {
         // Update hint string
         hintStringView.setText(game.getCurrentBeacon().getHintString());
 
@@ -174,36 +177,35 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
         // Display the current user position
         this.map.setMyLocationEnabled(true);
 
-        updateView();
+        updateHintView();
     }
 
-    // ======================
-    // LOCATION LISTENIR IMPL
-    // ======================
-
-    public void onLocationChanged(Location location) {
+    /**
+     * Method called on every location changed (notified by the locationListener)
+     *
+     * @param location
+     *         the new location of the user
+     */
+    public void updateLocation(Location location) {
         Log.d(TAG, "Location changed. Lat = " + location.getLatitude() + " | Lon = " + location.getLongitude());
         this.map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), Constants.DEFAULT_MAP_ZOOM));
 
-        if (!game.isFinish()) {
-            Beacon currentBeacon = game.getCurrentBeacon();
-            float distance = location.distanceTo(currentBeacon.getCoordinates().toLocation()); // in meters
-            Log.d(TAG, "Distance to next step is " + distance + " meters");
-            updateHintLayoutColor(distance);
+        Beacon currentBeacon = game.getCurrentBeacon();
+        float distance = location.distanceTo(currentBeacon.getCoordinates().toLocation()); // in meters
+        Log.d(TAG, "Distance to next step is " + distance + " meters");
+        updateHintLayoutColor(distance);
 
-            if (distance < Constants.SECURITY_DISTANCE_METERS) {
-                try {
-                    Log.d(TAG, "Beacon reached !");
-                    game.processBeaconReached();
-                    displayBeaconReachedDialog();
-                    updateView();
-                } catch (ItineraryCompleteException e) {
-                    Log.d(TAG, "Itinerary finish");
-                    game.setFinish(true);
-                    displayEndGameDialog();
-                }
+        if (distance < Constants.SECURITY_DISTANCE_METERS) {
+            try {
+                Log.d(TAG, "Beacon reached !");
+                game.processBeaconReached();
+                displayBeaconReachedDialog();
+                updateHintView();
+            } catch (ItineraryCompleteException e) {
+                Log.d(TAG, "Itinerary finish");
+                game.setFinish(true);
+                displayEndGameDialog();
             }
         }
     }
-
 }
