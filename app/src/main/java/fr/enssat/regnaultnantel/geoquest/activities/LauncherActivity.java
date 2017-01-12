@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import fr.enssat.regnaultnantel.geoquest.R;
-import fr.enssat.regnaultnantel.geoquest.model.ItineraryRepository;
 import fr.enssat.regnaultnantel.geoquest.utilities.Constants;
 
 /**
@@ -14,17 +13,15 @@ import fr.enssat.regnaultnantel.geoquest.utilities.Constants;
  */
 public class LauncherActivity extends AbstractGeoQuestActivity {
 
-    private static final int START_GET_ITINERARY = 1;
+    private static final int REQUEST_CODE_START_GET_ITINERARY = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
 
-
-        ItineraryRepository repository = new ItineraryRepository(this);
-        repository.removeAll();
-
+       // ItineraryRepository repository = new ItineraryRepository(this);
+       // repository.removeAll();
 
         Button gameButton = (Button) findViewById(R.id.start_game_button);
         gameButton.setOnClickListener(new View.OnClickListener() {
@@ -48,7 +45,7 @@ public class LauncherActivity extends AbstractGeoQuestActivity {
     private void askForItinerary() {
         Intent intent = new Intent(this, ItineraryListActivity.class);
         intent.putExtra(Constants.ITINERARY_LIST_ACTION_PARAM,Constants.ITINERARY_LIST_ACTION_GAME);
-        startActivityForResult(intent, START_GET_ITINERARY);
+        startActivityForResult(intent, REQUEST_CODE_START_GET_ITINERARY);
     }
 
     private void startGame(String itinerary) {
@@ -60,13 +57,13 @@ public class LauncherActivity extends AbstractGeoQuestActivity {
     private void startItineraryEditor() {
         Intent intent = new Intent(this, ItineraryListActivity.class);
         intent.putExtra(Constants.ITINERARY_LIST_ACTION_PARAM, Constants.ITINERARY_LIST_ACTION_EDITOR);
-        startActivityForResult(intent, START_GET_ITINERARY);
+        startActivityForResult(intent, REQUEST_CODE_START_GET_ITINERARY);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d(TAG, "onActivityResult with request code = " + requestCode);
-        if (requestCode == START_GET_ITINERARY && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_CODE_START_GET_ITINERARY && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             String itineraryName = (String) extras.get(Constants.ITINERARY_INTENT_PARAM);
             Log.d(TAG, "Going to start game for itinerary name = " + itineraryName);

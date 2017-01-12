@@ -89,7 +89,7 @@ public class ItineraryRepository {
             }
         }
         Log.d(TAG, "Found " + names.size() + " itinerary");
-        if (names.size() == 0) {
+        if (names.isEmpty()) {
             names.add(Constants.DEFAULT_ITINERARY_NAME);
         }
         return names;
@@ -103,6 +103,21 @@ public class ItineraryRepository {
         return JSONHelper.fromJSON(inputStream, Itinerary.class);
     }
 
+    // ======
+    // UPDATE
+    // ======
+
+    // Quick and dirty: remove the file and re-save it
+    public Itinerary update(Itinerary itinerary) {
+        remove(itinerary);
+        save(itinerary);
+        return itinerary;
+    }
+
+    // ======
+    // DELETE
+    // ======
+
     public void removeAll() {
         File folder = new File(SD_CARD + Constants.GEO_QUEST_SD_CARD_DIRECTORY);
         File[] files = folder.listFiles();
@@ -114,5 +129,20 @@ public class ItineraryRepository {
             }
         }
         Log.d(TAG, count + " file(s) removed");
+    }
+
+    public void remove(Itinerary itinerary) {
+        remove(itinerary.getName());
+    }
+
+    public void remove(String itineraryName) {
+        File folder = new File(SD_CARD + Constants.GEO_QUEST_SD_CARD_DIRECTORY);
+        File[] files = folder.listFiles();
+
+        for (File file : files) {
+            if (file.isFile() && file.getName().equals(itineraryName)) {
+                file.delete();
+            }
+        }
     }
 }

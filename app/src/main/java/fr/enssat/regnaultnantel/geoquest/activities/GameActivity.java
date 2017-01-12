@@ -62,11 +62,29 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
         };
         String itineraryName = getIntent().getStringExtra(Constants.ITINERARY_INTENT_PARAM);
         Itinerary itinerary = mItineraryRepository.load(itineraryName);
+        checkItinerary(itinerary);
         this.mGameData = new GameSessionData(itinerary);
 
         // Obtain the SupportMapFragment and get notified when the mMap is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+    }
+
+    private void checkItinerary(Itinerary itinerary) {
+        if (itinerary.getBeacons().isEmpty()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.error);
+            builder.setMessage(R.string.itinerary_no_beacons);
+            builder.setCancelable(false);
+            builder.setNeutralButton(R.string.game_finish_dialog_button, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(GameActivity.this, LauncherActivity.class);
+                    startActivity(intent);
+                }
+            });
+            builder.create().show();
+        }
     }
 
     @Override
