@@ -30,16 +30,16 @@ import fr.enssat.regnaultnantel.geoquest.utilities.GlobalUtils;
 
 public class GameActivity extends AbstractGeoQuestActivity implements OnMapReadyCallback {
 
-    private LocationManager locationManager;
-    private ItineraryRepository itineraryRepository = new ItineraryRepository(this);
-    private AbstractLocationListenerImpl locationListener;
+    private LocationManager mLocationManager;
+    private ItineraryRepository mItineraryRepository = new ItineraryRepository(this);
+    private AbstractLocationListenerImpl mLocationListener;
 
-    private GoogleMap map;
-    private LinearLayout layoutHintView;
-    private TextView hintStringView;
-    private ImageView hintImageView;
+    private GoogleMap mMap;
+    private LinearLayout mLayoutHintView;
+    private TextView mHintStringView;
+    private ImageView mHintImageView;
 
-    private GameSessionData game;
+    private GameSessionData mGameData;
 
     // ===================
     // ACTIVITY MANAGEMENT
@@ -50,23 +50,23 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        hintStringView = (TextView) findViewById(R.id.hintString);
-        hintImageView = (ImageView) findViewById(R.id.hintImage);
-        layoutHintView = (LinearLayout) findViewById(R.id.layoutHint);
+        mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        mHintStringView = (TextView) findViewById(R.id.hintString);
+        mHintImageView = (ImageView) findViewById(R.id.hintImage);
+        mLayoutHintView = (LinearLayout) findViewById(R.id.layoutHint);
 
         String itineraryName = getIntent().getStringExtra(Constants.ITINERARY_INTENT_PARAM);
         Itinerary itinerary = getItinerary(itineraryName);
-        this.game = new GameSessionData(itinerary);
+        this.mGameData = new GameSessionData(itinerary);
 
-        this.locationListener = new AbstractLocationListenerImpl() {
+        this.mLocationListener = new AbstractLocationListenerImpl() {
             @Override
             public void onLocationChanged(Location location) {
                 updateLocation(location);
             }
         };
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        // Obtain the SupportMapFragment and get notified when the mMap is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
@@ -75,13 +75,14 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
     protected void onPause() {
         super.onPause();
         // Don't query for location updates if the activity is not active (battery...)
-        locationManager.removeUpdates(locationListener);
+        mLocationManager.removeUpdates(mLocationListener);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        locationManager.requestLocationUpdates(locationManager.getBestProvider(new Criteria(), false), 0, 0, locationListener);
+        // Enable location updates
+        mLocationManager.requestLocationUpdates(mLocationManager.getBestProvider(new Criteria(), true), 0, 0, mLocationListener);
     }
 
     // ==================
@@ -91,10 +92,10 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
     private Itinerary getItinerary(String itineraryName) {
         Itinerary itinerary;
         if (itineraryName == null) {
-            itinerary = itineraryRepository.getDefaultItinerary();
+            itinerary = mItineraryRepository.getDefaultItinerary();
         } else {
-            // itinerary = itineraryRepository.load(itineraryName); FIXME
-            itinerary = itineraryRepository.getDefaultItinerary();
+            // itinerary = mItineraryRepository.load(itineraryName); FIXME
+            itinerary = mItineraryRepository.getDefaultItinerary();
         }
         return itinerary;
     }
@@ -125,14 +126,14 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
      */
     private void updateHintView() {
         // Update hint string
-        hintStringView.setText(game.getCurrentBeacon().getHintString());
+        mHintStringView.setText(mGameData.getCurrentBeacon().getHintString());
 
         // Update hint image if present
-        if (game.getCurrentBeacon().getHintImage() != null) {
-            hintImageView.setImageBitmap(GlobalUtils.stringToBitmap(game.getCurrentBeacon().getHintImage()));
-            hintImageView.setVisibility(View.VISIBLE);
+        if (mGameData.getCurrentBeacon().getHintImage() != null) {
+            mHintImageView.setImageBitmap(GlobalUtils.stringToBitmap(mGameData.getCurrentBeacon().getHintImage()));
+            mHintImageView.setVisibility(View.VISIBLE);
         } else {
-            hintImageView.setVisibility(View.INVISIBLE);
+            mHintImageView.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -144,11 +145,11 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
      */
     private void updateHintLayoutColor(float distance) {
         if (distance < Constants.DISTANCE_NEAR_METERS) {
-            layoutHintView.setBackgroundColor(getResources().getColor(R.color.beaconNear));
+            mLayoutHintView.setBackgroundColor(getResources().getColor(R.color.beaconNear));
         } else if (distance < Constants.DISTANCE_MID_METERS) {
-            layoutHintView.setBackgroundColor(getResources().getColor(R.color.beaconMid));
+            mLayoutHintView.setBackgroundColor(getResources().getColor(R.color.beaconMid));
         } else {
-            layoutHintView.setBackgroundColor(getResources().getColor(R.color.beaconFar));
+            mLayoutHintView.setBackgroundColor(getResources().getColor(R.color.beaconFar));
         }
     }
 
@@ -157,38 +158,38 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
     // =====================
 
     /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
+     * Manipulates the mMap once available.
+     * This callback is triggered when the mMap is ready to be used.
      * This is where we can add markers or lines, add listeners or move the camera.
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        this.map = googleMap;
+        this.mMap = googleMap;
 
         // Set default camera position
-        Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(new Criteria(), false));
+        Location location = mLocationManager.getLastKnownLocation(mLocationManager.getBestProvider(new Criteria(), false));
         Log.d(TAG, "onMapReady - last known location = " + location);
         if (location != null) {
-            this.map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), Constants.DEFAULT_MAP_ZOOM));
+            this.mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), Constants.DEFAULT_MAP_ZOOM));
         }
 
         // Display the current user position
-        this.map.setMyLocationEnabled(true);
+        this.mMap.setMyLocationEnabled(true);
 
         updateHintView();
     }
 
     /**
-     * Method called on every location changed (notified by the locationListener)
+     * Method called on every location changed (notified by the mLocationListener)
      *
      * @param location
      *         the new location of the user
      */
     public void updateLocation(Location location) {
         Log.d(TAG, "Location changed. Lat = " + location.getLatitude() + " | Lon = " + location.getLongitude());
-        this.map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), Constants.DEFAULT_MAP_ZOOM));
+        this.mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), Constants.DEFAULT_MAP_ZOOM));
 
-        Beacon currentBeacon = game.getCurrentBeacon();
+        Beacon currentBeacon = mGameData.getCurrentBeacon();
         float distance = location.distanceTo(currentBeacon.getCoordinates().toLocation()); // in meters
         Log.d(TAG, "Distance to next step is " + distance + " meters");
         updateHintLayoutColor(distance);
@@ -196,12 +197,12 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
         if (distance < Constants.SECURITY_DISTANCE_METERS) {
             try {
                 Log.d(TAG, "Beacon reached !");
-                game.processBeaconReached();
+                mGameData.processBeaconReached();
                 displayBeaconReachedDialog();
                 updateHintView();
             } catch (ItineraryCompleteException e) {
                 Log.d(TAG, "Itinerary finish");
-                game.setFinish(true);
+                mGameData.setFinish(true);
                 displayEndGameDialog();
             }
         }

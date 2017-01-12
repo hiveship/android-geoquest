@@ -1,7 +1,7 @@
 package fr.enssat.regnaultnantel.geoquest.exceptions;
 
 
-public class GeoQuestUnexpectedException extends AbstractGeoQuestUncheckedException {
+public class GeoQuestUnexpectedException extends AbstractGeoQuestException {
     public GeoQuestUnexpectedException(String message) {
         super(message);
     }

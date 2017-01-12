@@ -11,6 +11,7 @@ import fr.enssat.regnaultnantel.geoquest.model.Beacon;
 import fr.enssat.regnaultnantel.geoquest.model.BeaconAdapter;
 import fr.enssat.regnaultnantel.geoquest.model.Itinerary;
 
+@Deprecated
 public class PathEditorActivity extends AppCompatActivity {
 
     @Override

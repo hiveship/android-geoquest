@@ -1,11 +1,15 @@
 <resources>
     <string name="app_name">Geo Quest - Découvrez avec passion</string>
-    <string name="title_activity_maps">Map</string>
     <string name="game_finish">Partie terminée !</string>
-    <string name="imageViewHint">Image associée à l\'indice</string>
-    <string name="finish_beacon">Vous venez d\'atteindre l\'étape courrante ! Passez à la suite ;)</string>
+    <string name="image_view_hint">Image associée à l\'indice</string>
+    <string name="finish_beacon">Vous venez d\'atteindre cette balise ! Passez à la suite ;)</string>
     <string name="congrats">Félicitations</string>
     <string name="game_finish_dialog_button">Revenir au menu principal</string>
     <string name="launcher_start_button">Jouer</string>
     <string name="launcher_editor_button">Edition de parcours</string>
+    <string name="quit">Revenir au menu principal</string>
+    <string name="help">Aide</string>
+    <string name="save_beacon">Enregistrer</string>
+    <string name="longitude">Longitude</string>
+    <string name="latitude">Latitude</string>
 </resources>

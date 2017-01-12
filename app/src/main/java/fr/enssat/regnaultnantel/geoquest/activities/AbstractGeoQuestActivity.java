@@ -7,7 +7,6 @@ public abstract class AbstractGeoQuestActivity extends AppCompatActivity {
     /**
      * This TAG is used by the Android Logger
      */
-    protected static final String TAG = LauncherActivity.class.getCanonicalName();
+    protected final String TAG = getClass().getCanonicalName();
 
-    //TODO: Faire menu dans cette classe
 }

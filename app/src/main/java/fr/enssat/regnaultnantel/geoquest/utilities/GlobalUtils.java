@@ -6,6 +6,8 @@ import android.util.Base64;
 
 public class GlobalUtils {
 
+    private static final String LOGGER_TAG = GlobalUtils.class.getCanonicalName();
+
     public static Bitmap stringToBitmap(String base64Data) {
         byte[] decodedString = Base64.decode(base64Data, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);

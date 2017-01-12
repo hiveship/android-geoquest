@@ -5,62 +5,53 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import fr.enssat.regnaultnantel.geoquest.exceptions.ItineraryCompleteException;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Itinerary {
     private static final String TAG = Itinerary.class.getCanonicalName();
 
-    private String name;
-    private Date creationDate;
-    private List<Beacon> beacons;
+    private String mName;
+    private List<Beacon> mBeacons;
     @JsonIgnore
-    private int step = 0;
+    private int mStep = 0;
 
     public Itinerary() {
-        beacons = new ArrayList<>();
+        mBeacons = new ArrayList<>();
     }
 
     @JsonIgnore
-    public Beacon getNextStep() throws ItineraryCompleteException {
-        if (step < beacons.size()) {
-            Beacon next = beacons.get(step);
-            step++;
-            Log.d(TAG, "step ++");
+    public Beacon getNextStep() {
+        if (mStep < mBeacons.size()) {
+            Beacon next = mBeacons.get(mStep);
+            mStep++;
+            Log.d(TAG, "mStep ++");
             return next;
         }
         throw new ItineraryCompleteException();
     }
 
     public List<Beacon> getBeacons() {
-        return beacons;
+        return mBeacons;
     }
 
     public void setBeacons(List<Beacon> beacons) {
-        this.beacons = beacons;
+        this.mBeacons = beacons;
     }
 
     public int getStep() {
-        return step;
+        return mStep;
     }
 
     public void setStep(int step) {
-        this.step = step;
+        this.mStep = step;
     }
 
     public String getName() {
-        return name;
+        return mName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.mName = name;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
 }

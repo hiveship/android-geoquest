@@ -6,63 +6,51 @@ package fr.enssat.regnaultnantel.geoquest.model;
  */
 public class Beacon {
 
-    private String name;
-    private String hintString;
-    private String hintImage;
-    private Coordinates coordinates;
-    private boolean reached = false;
+    private String mName;
+    private String mHintString;
+    private String mHintImage;
+    private Coordinates mCoordinates;
+
 
     public String getName() {
-        return name;
+        return mName;
     }
 
     /**
      * Returns a text information about the current beacon.
      */
     public String getHintString() {
-        return hintString;
+        return mHintString;
     }
 
     /**
      * Returns a base64 encoded image representing the current beacon.
      */
     public String getHintImage() {
-        return hintImage;
+        return mHintImage;
     }
 
     /**
-     * Returns the GPS coordinates of the current beacon.
+     * Returns the GPS mCoordinates of the current beacon.
      */
     public Coordinates getCoordinates() {
-        return coordinates;
+        return mCoordinates;
     }
 
     public void setCoordinates(Coordinates coordinates) {
-        this.coordinates = coordinates;
-    }
-
-    /**
-     * Indicates wheter the player has reached or not the current beacon.
-     */
-    public boolean isReached() {
-        return reached;
+        this.mCoordinates = coordinates;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.mName = name;
     }
 
     public void setHintString(String hintString) {
-        this.hintString = hintString;
+        this.mHintString = hintString;
     }
 
     public void setHintImage(String hintImage) {
-        this.hintImage = hintImage;
+        this.mHintImage = hintImage;
     }
-
-    public void setReached(boolean reached) {
-        this.reached = reached;
-    }
-
-
+    
 }

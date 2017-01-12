@@ -20,12 +20,13 @@ import java.util.List;
 public class ItineraryRepository {
 
     private static final String TAG = ItineraryRepository.class.getCanonicalName();
+
     private static final File SD_CARD = Environment.getExternalStorageDirectory();
-    private Context context;
+    private Context mContext;
 
     public ItineraryRepository(Context context) {
-        this.context = context;
-        // Make sure the directory is created
+        this.mContext = context;
+        // Make sure the path exists
         new File(SD_CARD.getAbsolutePath() + Constants.GEO_QUEST_SD_CARD_DIRECTORY).mkdirs();
     }
 
@@ -92,7 +93,7 @@ public class ItineraryRepository {
      * @return the default itinerary, specified in res/raw/default_itinerary.json
      */
     public Itinerary getDefaultItinerary() {
-        InputStream inputStream = context.getResources().openRawResource(R.raw.default_itinerary);
+        InputStream inputStream = mContext.getResources().openRawResource(R.raw.default_itinerary);
         return JSONHelper.fromJSON(inputStream, Itinerary.class);
     }
 }

@@ -4,46 +4,40 @@ import fr.enssat.regnaultnantel.geoquest.exceptions.ItineraryCompleteException;
 
 public class GameSessionData {
 
-    private boolean finish;
-    private Beacon currentBeacon;
-    private Itinerary itinerary;
+    private boolean mFinish;
+    private Beacon mCurrentBeacon;
+    private Itinerary mItinerary;
 
     public GameSessionData(Itinerary itinerary) {
-        this.itinerary = itinerary;
-        try {
-            this.currentBeacon = itinerary.getNextStep();
-        } catch (ItineraryCompleteException e) {
-            // Should not happen, just ignore.
-            e.printStackTrace();
-        }
+        this.mItinerary = itinerary;
+        this.mCurrentBeacon = itinerary.getNextStep();
     }
 
     public boolean isFinish() {
-        return finish;
+        return mFinish;
     }
 
     public void setFinish(boolean finish) {
-        this.finish = finish;
+        this.mFinish = finish;
     }
 
     public Beacon getCurrentBeacon() {
-        return currentBeacon;
+        return mCurrentBeacon;
     }
 
     public void setCurrentBeacon(Beacon currentBeacon) {
-        this.currentBeacon = currentBeacon;
+        this.mCurrentBeacon = currentBeacon;
     }
 
     public Itinerary getItinerary() {
-        return itinerary;
+        return mItinerary;
     }
 
     public void setItinerary(Itinerary itinerary) {
-        this.itinerary = itinerary;
+        this.mItinerary = itinerary;
     }
 
     public void processBeaconReached() throws ItineraryCompleteException {
-        currentBeacon.setReached(true);
-        currentBeacon = itinerary.getNextStep(); // throw if game finish
+        mCurrentBeacon = mItinerary.getNextStep(); // throw if game is finish
     }
 }

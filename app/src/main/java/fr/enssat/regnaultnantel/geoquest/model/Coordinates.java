@@ -5,23 +5,23 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Coordinates {
 
-    private double longitude;
-    private double latitude;
+    private double mLongitude;
+    private double mLatitude;
 
     public double getLongitude() {
-        return longitude;
+        return mLongitude;
     }
 
     public void setLongitude(double longitude) {
-        this.longitude = longitude;
+        this.mLongitude = longitude;
     }
 
     public double getLatitude() {
-        return latitude;
+        return mLatitude;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public void setLatitude(double mLatitude) {
+        this.mLatitude = mLatitude;
     }
 
     @JsonIgnore

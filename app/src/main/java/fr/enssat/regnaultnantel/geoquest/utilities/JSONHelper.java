@@ -13,18 +13,18 @@ import java.io.InputStream;
 
 public class JSONHelper {
 
-    private static final String LOGGER_TAG = JSONHelper.class.getName();
+    private static final String LOGGER_TAG = JSONHelper.class.getCanonicalName();
 
-    private static ObjectMapper MAPPER = new ObjectMapper();
+    private static ObjectMapper sMapper = new ObjectMapper();
 
     static {
-        MAPPER.setSerializationInclusion(Include.NON_NULL);
-        MAPPER.configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false);
+        sMapper.setSerializationInclusion(Include.NON_NULL);
+        sMapper.configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false);
     }
 
     public static String toJSON(Object object) throws JSONProcessingException {
         try {
-            return MAPPER.writeValueAsString(object);
+            return sMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
             Log.e(LOGGER_TAG, ExceptionUtils.getStackTrace(e));
             throw new JSONProcessingException("Error while marshalling " + object.getClass() + " to JSON string", e);
@@ -33,7 +33,7 @@ public class JSONHelper {
 
     public static <T> T fromJSON(String jsonString, Class<T> valueType) throws JSONProcessingException {
         try {
-            return MAPPER.readValue(jsonString, valueType);
+            return sMapper.readValue(jsonString, valueType);
         } catch (IOException e) {
             Log.e(LOGGER_TAG, ExceptionUtils.getStackTrace(e));
             throw new JSONProcessingException("Error while unmarshalling " + valueType, e);
@@ -42,7 +42,7 @@ public class JSONHelper {
 
     public static <T> T fromJSON(InputStream jsonStream, Class<T> valueType) throws JSONProcessingException {
         try {
-            return MAPPER.readValue(jsonStream, valueType);
+            return sMapper.readValue(jsonStream, valueType);
         } catch (IOException e) {
             Log.e(LOGGER_TAG, ExceptionUtils.getStackTrace(e));
             throw new JSONProcessingException("Error while unmarshalling " + valueType, e);

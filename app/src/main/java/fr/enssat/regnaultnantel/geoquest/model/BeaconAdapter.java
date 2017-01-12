@@ -2,9 +2,6 @@ package fr.enssat.regnaultnantel.geoquest.model;
 
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import fr.enssat.regnaultnantel.geoquest.R;
+import fr.enssat.regnaultnantel.geoquest.utilities.GlobalUtils;
 
 public class BeaconAdapter extends BaseAdapter {
 
@@ -62,10 +60,7 @@ public class BeaconAdapter extends BaseAdapter {
         hint.setText(itinerary.getBeacons().get(position).getHintString());
         String image = itinerary.getBeacons().get(position).getHintImage();
         if (image != null) {
-            byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-
-            imageView.setImageBitmap(decodedByte);
+            imageView.setImageBitmap(GlobalUtils.stringToBitmap(image));
         }
 
         return layoutItem;
