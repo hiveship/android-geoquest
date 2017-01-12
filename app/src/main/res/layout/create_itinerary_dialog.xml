@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@color/grey">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/field_itinerary_name"
+            android:textColor="@color/textWhite"/>
+
+    <EditText
+            android:id="@+id/field_itinerary_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/field_itinerary_name"
+            android:textColorHint="@color/textWhite"
+            android:textColor="@color/textWhite"
+            android:padding="10dp"/>
+</LinearLayout>

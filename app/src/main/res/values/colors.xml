@@ -7,4 +7,5 @@
     <color name="beaconMid">#FFC107</color>
     <color name="beaconFar">#03A9F4</color>
     <color name="textWhite">#FFFFFF</color>
+    <color name="grey">#424242</color>
 </resources>

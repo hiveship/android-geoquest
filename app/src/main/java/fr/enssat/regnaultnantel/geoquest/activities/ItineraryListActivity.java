@@ -1,24 +1,31 @@
 package fr.enssat.regnaultnantel.geoquest.activities;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import fr.enssat.regnaultnantel.geoquest.R;
+import fr.enssat.regnaultnantel.geoquest.model.Itinerary;
 import fr.enssat.regnaultnantel.geoquest.model.ItineraryRepository;
 import fr.enssat.regnaultnantel.geoquest.utilities.Constants;
 
 import java.util.List;
 
-public class ItineraryListActivity extends AbstractGeoQuestActivity implements AdapterView.OnItemClickListener {
+public class ItineraryListActivity extends AbstractGeoQuestActivity {
 
     private ListView mListView;
+    private FloatingActionButton mAddButton;
+    private ArrayAdapter<String> mAdapter;
     private ItineraryRepository mItineraryRepository = new ItineraryRepository(this);
     private List<String> mItineraries;
 
@@ -29,30 +36,71 @@ public class ItineraryListActivity extends AbstractGeoQuestActivity implements A
         mListView = (ListView) findViewById(R.id.itinerary_list);
         mItineraries = mItineraryRepository.getAll();
 
-      //  ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mItineraries);
-        mListView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1) {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                TextView textView = (TextView) super.getView(position, convertView, parent);
-
-                //String currentLocation = getResources().getString(R.string.Current_Location);
-                int textColor = R.color.textWhite;
-                textView.setTextColor(getResources().getColor(textColor));
-                textView.setText(mItineraries.get(position));
-
-                return textView;
-            }
-        });
-       // mListView.setAdapter(adapter);
-        mListView.setOnItemClickListener(this);
+        initializeListView();
+        initializeCreateButton();
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(this, LauncherActivity.class);
-        intent.putExtra(Constants.ITINERARY_INTENT_PARAM, mItineraries.get(position));
-        Log.d(TAG, "Start intent with extra itinerary name = " + mItineraries.get(position));
-        setResult(RESULT_OK, intent);
-        finish();
+    protected void onResume() {
+        super.onResume();
+        refreshListView();
     }
+
+    private void initializeListView() {
+        mAdapter = new ArrayAdapter<>(this, R.layout.itinerary_row_layout);
+        mListView.setAdapter(mAdapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(ItineraryListActivity.this, LauncherActivity.class);
+                intent.putExtra(Constants.ITINERARY_INTENT_PARAM, mItineraries.get(position));
+                Log.d(TAG, "Start intent with extra itinerary name = " + mItineraries.get(position));
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
+    }
+
+    private void initializeCreateButton() {
+        mAddButton = (FloatingActionButton) findViewById(R.id.add_itinerary_button);
+        mAddButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Inflate view and get widgets
+                LayoutInflater layoutInflater = LayoutInflater.from(ItineraryListActivity.this);
+                View promptView = layoutInflater.inflate(R.layout.create_itinerary_dialog, null);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ItineraryListActivity.this);
+                alertDialogBuilder.setView(promptView);
+                final EditText itineraryName = (EditText) promptView.findViewById(R.id.field_itinerary_name);
+
+                // Configure behavior
+                alertDialogBuilder.setCancelable(false);
+                alertDialogBuilder.setPositiveButton(R.string.create, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Itinerary newItinerary = new Itinerary();
+                        newItinerary.setName(itineraryName.getText().toString());
+                        Log.d(TAG, "Creating a new itinerary with name = " + itineraryName.getText().toString());
+                        mItineraryRepository.save(newItinerary);
+                        refreshListView();
+                    }
+                });
+
+                alertDialogBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+                // Display
+                alertDialogBuilder.create().show();
+            }
+        });
+    }
+
+    private void refreshListView() {
+        mItineraries = mItineraryRepository.getAll();
+        mAdapter.clear();
+        mAdapter.addAll(mItineraries);
+    }
+
 }

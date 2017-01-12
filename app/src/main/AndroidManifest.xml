@@ -30,9 +30,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activities.PathEditorActivity" />
-        <activity android:name=".activities.AddPathStep"/>
-        <activity android:name=".activities.ItineraryListActivity" />
+        <activity android:name=".activities.AddPathStep"
+                  android:label="@string/activity_add_beacon"/>
+        <activity android:name=".activities.ItineraryListActivity"
+                  android:label="@string/activity_my_itineraries"/>
         <activity android:name=".activities.GameActivity"/>
 
         <!-- The API key for Google Maps-based APIs -->

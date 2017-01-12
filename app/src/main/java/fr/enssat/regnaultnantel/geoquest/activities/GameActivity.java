@@ -54,17 +54,15 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
         mHintStringView = (TextView) findViewById(R.id.hintString);
         mHintImageView = (ImageView) findViewById(R.id.hintImage);
         mLayoutHintView = (LinearLayout) findViewById(R.id.layoutHint);
-
-        String itineraryName = getIntent().getStringExtra(Constants.ITINERARY_INTENT_PARAM);
-        Itinerary itinerary = getItinerary(itineraryName);
-        this.mGameData = new GameSessionData(itinerary);
-
-        this.mLocationListener = new AbstractLocationListenerImpl() {
+        mLocationListener = new AbstractLocationListenerImpl() {
             @Override
             public void onLocationChanged(Location location) {
                 updateLocation(location);
             }
         };
+        String itineraryName = getIntent().getStringExtra(Constants.ITINERARY_INTENT_PARAM);
+        Itinerary itinerary = getItinerary(itineraryName);
+        this.mGameData = new GameSessionData(itinerary);
 
         // Obtain the SupportMapFragment and get notified when the mMap is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -91,7 +89,7 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
 
     private Itinerary getItinerary(String itineraryName) {
         Itinerary itinerary;
-        if (itineraryName == null) {
+        if (itineraryName == Constants.DEFAULT_ITINERARY_NAME) {
             itinerary = mItineraryRepository.getDefaultItinerary();
         } else {
             // itinerary = mItineraryRepository.load(itineraryName); FIXME
@@ -185,25 +183,27 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
      * @param location
      *         the new location of the user
      */
-    public void updateLocation(Location location) {
-        Log.d(TAG, "Location changed. Lat = " + location.getLatitude() + " | Lon = " + location.getLongitude());
-        this.mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), Constants.DEFAULT_MAP_ZOOM));
+    private void updateLocation(Location location) {
+        if (mMap != null) {
+            Log.d(TAG, "Location changed. Lat = " + location.getLatitude() + " | Lon = " + location.getLongitude());
+            this.mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), Constants.DEFAULT_MAP_ZOOM));
 
-        Beacon currentBeacon = mGameData.getCurrentBeacon();
-        float distance = location.distanceTo(currentBeacon.getCoordinates().toLocation()); // in meters
-        Log.d(TAG, "Distance to next step is " + distance + " meters");
-        updateHintLayoutColor(distance);
+            Beacon currentBeacon = mGameData.getCurrentBeacon();
+            float distance = location.distanceTo(currentBeacon.getCoordinates().toLocation()); // in meters
+            Log.d(TAG, "Distance to next step is " + distance + " meters");
+            updateHintLayoutColor(distance);
 
-        if (distance < Constants.SECURITY_DISTANCE_METERS) {
-            try {
-                Log.d(TAG, "Beacon reached !");
-                mGameData.processBeaconReached();
-                displayBeaconReachedDialog();
-                updateHintView();
-            } catch (ItineraryCompleteException e) {
-                Log.d(TAG, "Itinerary finish");
-                mGameData.setFinish(true);
-                displayEndGameDialog();
+            if (distance < Constants.SECURITY_DISTANCE_METERS) {
+                try {
+                    Log.d(TAG, "Beacon reached !");
+                    mGameData.processBeaconReached();
+                    displayBeaconReachedDialog();
+                    updateHintView();
+                } catch (ItineraryCompleteException e) {
+                    Log.d(TAG, "Itinerary finish");
+                    mGameData.setFinish(true);
+                    displayEndGameDialog();
+                }
             }
         }
     }

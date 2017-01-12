@@ -12,4 +12,11 @@
     <string name="save_beacon">Enregistrer</string>
     <string name="longitude">Longitude</string>
     <string name="latitude">Latitude</string>
+    <string name="caption_beacon_coordinates">Coordonées GPS de la baslise :</string>
+    <string name="beacon_hint_string">Indice</string>
+    <string name="field_itinerary_name">Nom de l\'itinéraire</string>
+    <string name="create">Créer</string>
+    <string name="cancel">Annuler</string>
+    <string name="activity_add_beacon">Ajouter une balise</string>
+    <string name="activity_my_itineraries">Mes itinéraires</string>
 </resources>

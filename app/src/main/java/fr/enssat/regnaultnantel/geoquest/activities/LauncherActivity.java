@@ -20,7 +20,7 @@ public class LauncherActivity extends AbstractGeoQuestActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
 
-        Button gameButton = (Button) findViewById(R.id.startGameButton);
+        Button gameButton = (Button) findViewById(R.id.start_game_button);
         gameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,11 +28,11 @@ public class LauncherActivity extends AbstractGeoQuestActivity {
             }
         });
 
-        Button editorButton = (Button) findViewById(R.id.editPathButton);
+        Button editorButton = (Button) findViewById(R.id.edit_itinerary_button);
         editorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startPathEditor();
+                startItineraryEditor();
             }
         });
 
@@ -49,8 +49,8 @@ public class LauncherActivity extends AbstractGeoQuestActivity {
         startActivity(intent);
     }
 
-    private void startPathEditor() {
-        Intent intent = new Intent(this, PathEditorActivity.class);
+    private void startItineraryEditor() {
+        Intent intent = new Intent(this, ItineraryListActivity.class);
         startActivity(intent);
     }
 

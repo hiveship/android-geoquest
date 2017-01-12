@@ -35,7 +35,7 @@ public class ItineraryRepository {
     // ====
 
     public void save(Itinerary itinerary) {
-        File file = new File(SD_CARD.getAbsolutePath() + Constants.GEO_QUEST_SD_CARD_DIRECTORY + itinerary.getName());
+        File file = new File(SD_CARD + Constants.GEO_QUEST_SD_CARD_DIRECTORY, itinerary.getName());
         try (FileOutputStream ouputStream = new FileOutputStream(file)) {
             String jsonString = JSONHelper.toJSON(itinerary);
             ouputStream.write(jsonString.getBytes());
@@ -85,7 +85,10 @@ public class ItineraryRepository {
                 names.add(file.getName());
             }
         }
-        Log.d(TAG, "Found " + names.size() + "itinerary");
+        Log.d(TAG, "Found " + names.size() + " itinerary");
+        if (names.size() == 0) {
+            names.add(Constants.DEFAULT_ITINERARY_NAME);
+        }
         return names;
     }
 

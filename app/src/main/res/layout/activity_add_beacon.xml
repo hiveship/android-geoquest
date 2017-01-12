@@ -1,70 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/activity_add_beacon"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin">
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:background="@color/grey">
 
-    <ScrollView
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
         <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:srcCompat="@drawable/ic_menu_camera"
+                    android:layout_weight="1"/>
+
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:ems="10"
+                    android:hint="@string/beacon_hint_string"
+                    android:id="@+id/field_name"
+                    android:layout_weight="1"
+                    android:textColor="@color/textWhite"
+                    android:textColorHint="@color/textWhite"/>
+        </LinearLayout>
+
+        <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:ems="10"
+                android:text="@string/caption_beacon_coordinates"
+                android:textColor="#FF5722"/>
 
-            <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/latitude"
+                android:id="@+id/field_latitude"
+                android:textColor="@color/textWhite"
+                android:textColorHint="@color/textWhite"/>
 
-                <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:icon="@drawable/ic_menu_camera"
-                        android:layout_weight="1"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/longitude"
+                android:id="@+id/field_longitude"
+                android:textColor="@color/textWhite"
+                android:textColorHint="@color/textWhite"/>
 
-                <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:ems="10"
-                        android:id="@+id/field_name"
-                        android:layout_weight="1"/>
-            </LinearLayout>
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/latitude"
-                    android:id="@+id/field_latitude"/>
-
-            <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/latitude"
-                    android:id="@+id/field_latitude"/>
-
-            <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/longitude"
-                    android:id="@+id/field_longitude"/>
-
-            <Button
-                    android:text="@string/save_beacon"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/beacon_save"/>
-        </LinearLayout>
-    </ScrollView>
+        <Button
+                android:text="@string/save_beacon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/beacon_save"
+                android:background="#FF5722"/>
+    </LinearLayout>
 </RelativeLayout>

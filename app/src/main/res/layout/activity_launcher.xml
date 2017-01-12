@@ -3,7 +3,7 @@
               android:id="@+id/activity_launcher"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="#424242"
+              android:background="@color/grey"
               android:orientation="vertical"
 >
 
@@ -20,16 +20,16 @@
             android:text="@string/launcher_start_button"
             android:layout_height="wrap_content"
             android:layout_marginTop="88dp"
-            android:id="@+id/startGameButton"
+            android:id="@+id/start_game_button"
             android:layout_width="match_parent"
-            android:background="#FF5722"/>
+            android:background="@color/colorPrimary"/>
 
     <Button
             android:text="@string/launcher_editor_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="45dp"
-            android:id="@+id/editPathButton"
-            android:background="#FF5722"/>
+            android:id="@+id/edit_itinerary_button"
+            android:background="@color/colorPrimary"/>
 
 </LinearLayout>
