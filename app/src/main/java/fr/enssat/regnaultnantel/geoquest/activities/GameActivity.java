@@ -61,7 +61,7 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
             }
         };
         String itineraryName = getIntent().getStringExtra(Constants.ITINERARY_INTENT_PARAM);
-        Itinerary itinerary = getItinerary(itineraryName);
+        Itinerary itinerary = mItineraryRepository.load(itineraryName);
         this.mGameData = new GameSessionData(itinerary);
 
         // Obtain the SupportMapFragment and get notified when the mMap is ready to be used.
@@ -86,17 +86,6 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
     // ==================
     // GEO QUEST BUSINESS
     // ==================
-
-    private Itinerary getItinerary(String itineraryName) {
-        Itinerary itinerary;
-        if (itineraryName == Constants.DEFAULT_ITINERARY_NAME) {
-            itinerary = mItineraryRepository.getDefaultItinerary();
-        } else {
-            // itinerary = mItineraryRepository.load(itineraryName); FIXME
-            itinerary = mItineraryRepository.getDefaultItinerary();
-        }
-        return itinerary;
-    }
 
     private void displayEndGameDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

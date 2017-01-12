@@ -11,4 +11,8 @@ public final class Constants {
     public static final String GEO_QUEST_SD_CARD_DIRECTORY = "/geoquest";
 
     public static final String DEFAULT_ITINERARY_NAME = "Example";
+
+    public static final String ITINERARY_LIST_ACTION_PARAM = "action";
+    public static final String ITINERARY_LIST_ACTION_GAME = "game";
+    public static final String ITINERARY_LIST_ACTION_EDITOR = "editor";
 }

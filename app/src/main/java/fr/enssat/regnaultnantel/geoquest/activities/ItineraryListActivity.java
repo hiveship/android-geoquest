@@ -21,6 +21,8 @@ import fr.enssat.regnaultnantel.geoquest.utilities.Constants;
 
 import java.util.List;
 
+import static fr.enssat.regnaultnantel.geoquest.utilities.Constants.ITINERARY_INTENT_PARAM;
+
 public class ItineraryListActivity extends AbstractGeoQuestActivity {
 
     private ListView mListView;
@@ -52,13 +54,30 @@ public class ItineraryListActivity extends AbstractGeoQuestActivity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(ItineraryListActivity.this, LauncherActivity.class);
-                intent.putExtra(Constants.ITINERARY_INTENT_PARAM, mItineraries.get(position));
-                Log.d(TAG, "Start intent with extra itinerary name = " + mItineraries.get(position));
-                setResult(RESULT_OK, intent);
-                finish();
+                String originAction = getIntent().getExtras().getString(Constants.ITINERARY_LIST_ACTION_PARAM);
+                String selected = mItineraries.get(position);
+                if (originAction.equals(Constants.ITINERARY_LIST_ACTION_GAME)) {
+                    doGameAction(selected);
+                } else if(originAction.equals(Constants.ITINERARY_LIST_ACTION_EDITOR)) {
+                    doEditorAction(selected);
+                }
+
             }
         });
+    }
+
+    private void doEditorAction(String selected) {
+        Intent intent = new Intent(this, BeaconsListActivity.class);
+        intent.putExtra(ITINERARY_INTENT_PARAM, selected);
+        startActivity(intent);
+    }
+
+    private void doGameAction(String selected) {
+        Intent intent = new Intent(ItineraryListActivity.this, LauncherActivity.class);
+        intent.putExtra(ITINERARY_INTENT_PARAM, selected);
+        Log.d(TAG, "Start intent with extra itinerary name = " + selected);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     private void initializeCreateButton() {

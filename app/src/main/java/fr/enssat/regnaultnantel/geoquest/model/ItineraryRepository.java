@@ -56,6 +56,9 @@ public class ItineraryRepository {
      * @return itinerary
      */
     public Itinerary load(String itineraryName) {
+        if (itineraryName.equals(Constants.DEFAULT_ITINERARY_NAME)) {
+            return getDefaultItinerary();
+        }
         File file = new File(SD_CARD + Constants.GEO_QUEST_SD_CARD_DIRECTORY, itineraryName);
         try {
             StringBuilder text = new StringBuilder();
@@ -95,8 +98,21 @@ public class ItineraryRepository {
     /**
      * @return the default itinerary, specified in res/raw/default_itinerary.json
      */
-    public Itinerary getDefaultItinerary() {
+    private Itinerary getDefaultItinerary() {
         InputStream inputStream = mContext.getResources().openRawResource(R.raw.default_itinerary);
         return JSONHelper.fromJSON(inputStream, Itinerary.class);
+    }
+
+    public void removeAll() {
+        File folder = new File(SD_CARD + Constants.GEO_QUEST_SD_CARD_DIRECTORY);
+        File[] files = folder.listFiles();
+
+        int count = 0;
+        for (File file : files) {
+            if (file.isFile()) {
+                file.delete();
+            }
+        }
+        Log.d(TAG, count + " file(s) removed");
     }
 }

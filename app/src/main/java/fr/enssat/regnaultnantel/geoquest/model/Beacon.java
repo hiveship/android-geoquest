@@ -6,15 +6,11 @@ package fr.enssat.regnaultnantel.geoquest.model;
  */
 public class Beacon {
 
-    private String mName;
     private String mHintString;
     private String mHintImage;
     private Coordinates mCoordinates;
 
 
-    public String getName() {
-        return mName;
-    }
 
     /**
      * Returns a text information about the current beacon.
@@ -39,10 +35,6 @@ public class Beacon {
 
     public void setCoordinates(Coordinates coordinates) {
         this.mCoordinates = coordinates;
-    }
-
-    public void setName(String name) {
-        this.mName = name;
     }
 
     public void setHintString(String hintString) {

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import fr.enssat.regnaultnantel.geoquest.R;
+import fr.enssat.regnaultnantel.geoquest.model.ItineraryRepository;
 import fr.enssat.regnaultnantel.geoquest.utilities.Constants;
 
 /**
@@ -19,6 +20,11 @@ public class LauncherActivity extends AbstractGeoQuestActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
+
+
+        ItineraryRepository repository = new ItineraryRepository(this);
+        repository.removeAll();
+
 
         Button gameButton = (Button) findViewById(R.id.start_game_button);
         gameButton.setOnClickListener(new View.OnClickListener() {
@@ -40,7 +46,9 @@ public class LauncherActivity extends AbstractGeoQuestActivity {
     }
 
     private void askForItinerary() {
-        startActivityForResult(new Intent(this, ItineraryListActivity.class), START_GET_ITINERARY);
+        Intent intent = new Intent(this, ItineraryListActivity.class);
+        intent.putExtra(Constants.ITINERARY_LIST_ACTION_PARAM,Constants.ITINERARY_LIST_ACTION_GAME);
+        startActivityForResult(intent, START_GET_ITINERARY);
     }
 
     private void startGame(String itinerary) {
@@ -51,7 +59,8 @@ public class LauncherActivity extends AbstractGeoQuestActivity {
 
     private void startItineraryEditor() {
         Intent intent = new Intent(this, ItineraryListActivity.class);
-        startActivity(intent);
+        intent.putExtra(Constants.ITINERARY_LIST_ACTION_PARAM, Constants.ITINERARY_LIST_ACTION_EDITOR);
+        startActivityForResult(intent, START_GET_ITINERARY);
     }
 
     @Override

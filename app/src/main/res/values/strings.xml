@@ -19,4 +19,5 @@
     <string name="cancel">Annuler</string>
     <string name="activity_add_beacon">Ajouter une balise</string>
     <string name="activity_my_itineraries">Mes itinéraires</string>
+    <string name="activity_beacons_list">Balises de l\'itinéraire</string>
 </resources>
