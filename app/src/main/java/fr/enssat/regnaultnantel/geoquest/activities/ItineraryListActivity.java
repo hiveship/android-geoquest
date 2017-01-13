@@ -88,13 +88,13 @@ public class ItineraryListActivity extends AbstractGeoQuestActivity {
                 // Inflate view and get widgets
                 LayoutInflater layoutInflater = LayoutInflater.from(ItineraryListActivity.this);
                 View promptView = layoutInflater.inflate(R.layout.create_itinerary_dialog, null);
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ItineraryListActivity.this);
-                alertDialogBuilder.setView(promptView);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ItineraryListActivity.this, R.style.geoquest_dialog_style);
+                builder.setView(promptView);
                 final EditText itineraryName = (EditText) promptView.findViewById(R.id.field_itinerary_name);
 
                 // Configure behavior
-                alertDialogBuilder.setCancelable(false);
-                alertDialogBuilder.setPositiveButton(R.string.create, new DialogInterface.OnClickListener() {
+                builder.setCancelable(false);
+                builder.setPositiveButton(R.string.create, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Itinerary newItinerary = new Itinerary();
                         newItinerary.setName(itineraryName.getText().toString());
@@ -104,14 +104,14 @@ public class ItineraryListActivity extends AbstractGeoQuestActivity {
                     }
                 });
 
-                alertDialogBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
                 });
 
                 // Display
-                alertDialogBuilder.create().show();
+                builder.create().show();
             }
         });
     }
