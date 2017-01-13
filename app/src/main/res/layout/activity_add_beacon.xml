@@ -24,7 +24,8 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     app:srcCompat="@drawable/ic_menu_camera"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:id="@+id/beacon_take_hint_image"/>
 
             <EditText
                     android:layout_width="wrap_content"
@@ -32,7 +33,7 @@
                     android:inputType="text"
                     android:ems="10"
                     android:hint="@string/beacon_hint_string"
-                    android:id="@+id/field_name"
+                    android:id="@+id/field_beacon_hint_string"
                     android:layout_weight="1"
                     android:textColor="@color/textWhite"
                     android:textColorHint="@color/textWhite"/>
@@ -50,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/latitude"
-                android:id="@+id/field_latitude"
+                android:id="@+id/field_beacon_latitude"
                 android:textColor="@color/textWhite"
                 android:textColorHint="@color/textWhite"/>
 
@@ -59,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/longitude"
-                android:id="@+id/field_longitude"
+                android:id="@+id/field_beacon_longitude"
                 android:textColor="@color/textWhite"
                 android:textColorHint="@color/textWhite"/>
 
@@ -67,7 +68,7 @@
                 android:text="@string/save_beacon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/beacon_save"
+                android:id="@+id/beacon_save_button"
                 android:background="#FF5722"/>
     </LinearLayout>
 </RelativeLayout>

@@ -90,15 +90,15 @@ public class ItineraryListActivity extends AbstractGeoQuestActivity {
                 View promptView = layoutInflater.inflate(R.layout.create_itinerary_dialog, null);
                 AlertDialog.Builder builder = new AlertDialog.Builder(ItineraryListActivity.this, R.style.geoquest_dialog_style);
                 builder.setView(promptView);
-                final EditText itineraryName = (EditText) promptView.findViewById(R.id.field_itinerary_name);
+                final EditText itineraryNameWidget = (EditText) promptView.findViewById(R.id.field_itinerary_name);
 
                 // Configure behavior
                 builder.setCancelable(false);
                 builder.setPositiveButton(R.string.create, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Itinerary newItinerary = new Itinerary();
-                        newItinerary.setName(itineraryName.getText().toString());
-                        Log.d(TAG, "Creating a new itinerary with name = " + itineraryName.getText().toString());
+                        newItinerary.setName(itineraryNameWidget.getText().toString());
+                        Log.d(TAG, "Creating a new itinerary with name = " + itineraryNameWidget.getText().toString());
                         mItineraryRepository.save(newItinerary);
                         refreshListView();
                     }

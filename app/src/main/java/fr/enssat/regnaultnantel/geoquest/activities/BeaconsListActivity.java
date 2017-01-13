@@ -42,7 +42,9 @@ public class BeaconsListActivity extends AbstractGeoQuestActivity {
         mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(BeaconsListActivity.this, AddBeaconActivity.class), REQUEST_CODE_NEW_BEACON);
+                Intent intent = new Intent(BeaconsListActivity.this, AddBeaconActivity.class);
+                intent.putExtra(Constants.ITINERARY_INTENT_PARAM, mItinerary.getName());
+                startActivityForResult(intent, REQUEST_CODE_NEW_BEACON);
             }
         });
     }
