@@ -23,7 +23,7 @@
             <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    app:srcCompat="@drawable/ic_menu_camera"
+                    app:srcCompat="@drawable/camera"
                     android:layout_weight="1"
                     android:id="@+id/beacon_take_hint_image"/>
 

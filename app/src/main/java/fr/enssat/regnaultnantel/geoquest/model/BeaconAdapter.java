@@ -18,7 +18,7 @@ public class BeaconAdapter extends BaseAdapter {
 
     public BeaconAdapter(Context context, Itinerary itinerary) {
         this.mItinerary = itinerary;
-        mInflater = LayoutInflater.from(context);
+        this.mInflater = LayoutInflater.from(context);
     }
 
     @Override

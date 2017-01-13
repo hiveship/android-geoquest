@@ -7,7 +7,7 @@
 
     <ImageView
             android:id="@+id/beacon_hint_image"
-            app:srcCompat="@raw/default_beacon_image"
+            app:srcCompat="@drawable/default_beacon_image"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:paddingRight="16dp"/>

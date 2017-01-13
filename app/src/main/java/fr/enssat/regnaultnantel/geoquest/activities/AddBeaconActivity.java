@@ -3,6 +3,7 @@ package fr.enssat.regnaultnantel.geoquest.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -41,7 +42,6 @@ public class AddBeaconActivity extends AbstractGeoQuestActivity {
     private ItineraryRepository mItineraryRepository;
     private Itinerary mItinerary;
     private Beacon mNewBeacon;
-    private Bitmap mBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +61,8 @@ public class AddBeaconActivity extends AbstractGeoQuestActivity {
                 double latitude = Double.valueOf(mLatitudeWidget.getText().toString());
                 mNewBeacon.setCoordinates(new Coordinates(longitude, latitude));
                 mNewBeacon.setHintString(mHintStringWidget.getText().toString());
-
-                if (mBitmap != null) {
-                    mNewBeacon.setHintImage(GlobalUtils.bitmapToBase64String(mBitmap));
-                }
+                Bitmap bitmap = ((BitmapDrawable) mHintImageWidget.getDrawable()).getBitmap();
+                mNewBeacon.setHintImage(GlobalUtils.bitmapToBase64String(bitmap));
 
                 mItinerary.getBeacons().add(mNewBeacon);
                 mItineraryRepository.update(mItinerary);
@@ -121,7 +119,6 @@ public class AddBeaconActivity extends AbstractGeoQuestActivity {
         if (requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             mHintImageWidget.setImageBitmap(photo);
-            mBitmap = photo;
             //mNewBeacon.setHintImage(GlobalUtils.bitmapToBase64String(photo));
         }
     }
