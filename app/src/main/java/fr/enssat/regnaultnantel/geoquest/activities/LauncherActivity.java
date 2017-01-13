@@ -20,8 +20,8 @@ public class LauncherActivity extends AbstractGeoQuestActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
 
-       // ItineraryRepository repository = new ItineraryRepository(this);
-       // repository.removeAll();
+        // ItineraryRepository repository = new ItineraryRepository(this);
+        // repository.removeAll();
 
         Button gameButton = (Button) findViewById(R.id.start_game_button);
         gameButton.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +44,7 @@ public class LauncherActivity extends AbstractGeoQuestActivity {
 
     private void askForItinerary() {
         Intent intent = new Intent(this, ItineraryListActivity.class);
-        intent.putExtra(Constants.ITINERARY_LIST_ACTION_PARAM,Constants.ITINERARY_LIST_ACTION_GAME);
+        intent.putExtra(Constants.ITINERARY_LIST_ACTION_PARAM, Constants.ITINERARY_LIST_ACTION_GAME);
         startActivityForResult(intent, REQUEST_CODE_START_GET_ITINERARY);
     }
 

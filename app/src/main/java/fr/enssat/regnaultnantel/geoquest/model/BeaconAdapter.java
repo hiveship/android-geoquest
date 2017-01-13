@@ -52,7 +52,7 @@ public class BeaconAdapter extends BaseAdapter {
 
         hintStringWidget.setText(itinerary.getBeacons().get(position).getHintString());
         longitudeWidget.setText("Longitude " + itinerary.getBeacons().get(position).getCoordinates().getLongitude()); //FIXME
-        latitudeWidget.setText("Latitude "+itinerary.getBeacons().get(position).getCoordinates().getLatitude()); //FIXME
+        latitudeWidget.setText("Latitude " + itinerary.getBeacons().get(position).getCoordinates().getLatitude()); //FIXME
 
         String image = itinerary.getBeacons().get(position).getHintImage();
         if (image != null) {

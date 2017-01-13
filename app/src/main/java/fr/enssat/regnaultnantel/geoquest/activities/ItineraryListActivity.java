@@ -58,7 +58,7 @@ public class ItineraryListActivity extends AbstractGeoQuestActivity {
                 String selected = mItineraries.get(position);
                 if (originAction.equals(Constants.ITINERARY_LIST_ACTION_GAME)) {
                     doGameAction(selected);
-                } else if(originAction.equals(Constants.ITINERARY_LIST_ACTION_EDITOR)) {
+                } else if (originAction.equals(Constants.ITINERARY_LIST_ACTION_EDITOR)) {
                     doEditorAction(selected);
                 }
 

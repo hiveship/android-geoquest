@@ -11,7 +11,6 @@ public class Beacon {
     private Coordinates mCoordinates;
 
 
-
     /**
      * Returns a text information about the current beacon.
      */
@@ -44,5 +43,5 @@ public class Beacon {
     public void setHintImage(String hintImage) {
         this.mHintImage = hintImage;
     }
-    
+
 }
