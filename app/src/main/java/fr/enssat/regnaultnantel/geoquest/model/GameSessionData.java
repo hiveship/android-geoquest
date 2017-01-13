@@ -1,7 +1,5 @@
 package fr.enssat.regnaultnantel.geoquest.model;
 
-import fr.enssat.regnaultnantel.geoquest.exceptions.ItineraryCompleteException;
-
 public class GameSessionData {
 
     private boolean mFinish;
@@ -37,7 +35,7 @@ public class GameSessionData {
         this.mItinerary = itinerary;
     }
 
-    public void processBeaconReached() throws ItineraryCompleteException {
+    public void processBeaconReached() {
         mCurrentBeacon = mItinerary.getNextStep(); // throw if game is finish
     }
 }

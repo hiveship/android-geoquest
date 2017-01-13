@@ -3,6 +3,7 @@ package fr.enssat.regnaultnantel.geoquest.activities;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -62,19 +63,17 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
     }
 
     private void initGame(Itinerary itinerary) {
-        mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         mHintStringView = (TextView) findViewById(R.id.hintString);
         mHintImageView = (ImageView) findViewById(R.id.hintImage);
         mLayoutHintView = (LinearLayout) findViewById(R.id.layoutHint);
+        mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         mLocationListener = new AbstractLocationListenerImpl() {
             @Override
             public void onLocationChanged(Location location) {
                 updateLocation(location);
             }
         };
-
-
-        this.mGameData = new GameSessionData(itinerary);
+        mGameData = new GameSessionData(itinerary);
 
         // Obtain the SupportMapFragment and get notified when the mMap is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -215,6 +214,7 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
             updateHintLayoutColor(distance);
 
             if (distance < Constants.SECURITY_DISTANCE_METERS) {
+                // The current beacon is reached
                 try {
                     Log.d(TAG, "Beacon reached !");
                     mGameData.processBeaconReached();

@@ -14,11 +14,11 @@ import fr.enssat.regnaultnantel.geoquest.utilities.GlobalUtils;
 public class BeaconAdapter extends BaseAdapter {
 
     private Itinerary mItinerary;
-    private LayoutInflater mInflater;
+    private Context context;
 
     public BeaconAdapter(Context context, Itinerary itinerary) {
         this.mItinerary = itinerary;
-        this.mInflater = LayoutInflater.from(context);
+        this.context = context;
     }
 
     @Override
@@ -40,7 +40,8 @@ public class BeaconAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         LinearLayout item;
         if (convertView == null) {
-            item = (LinearLayout) mInflater.inflate(R.layout.row_beacon_layout, parent, false);
+            LayoutInflater inflater = LayoutInflater.from(context);
+            item = (LinearLayout) inflater.inflate(R.layout.row_beacon_layout, parent, false);
         } else {
             item = (LinearLayout) convertView;
         }
@@ -51,9 +52,11 @@ public class BeaconAdapter extends BaseAdapter {
         ImageView hintImageWidget = (ImageView) item.findViewById(R.id.beacon_hint_image);
 
         hintStringWidget.setText(mItinerary.getBeacons().get(position).getHintString());
-        longitudeWidget.setText("Longitude " + mItinerary.getBeacons().get(position).getCoordinates().getLongitude()); //FIXME
-        latitudeWidget.setText("Latitude " + mItinerary.getBeacons().get(position).getCoordinates().getLatitude()); //FIXME
+        Coordinates location = mItinerary.getBeacons().get(position).getCoordinates();
 
+        // Deprecated since API 24
+        longitudeWidget.setText(String.format(context.getResources().getConfiguration().locale, "%1$,.6f", location.getLongitude()));
+        latitudeWidget.setText(String.format(context.getResources().getConfiguration().locale, "%1$,.6f", location.getLatitude()));
         String image = mItinerary.getBeacons().get(position).getHintImage();
         if (image != null) {
             hintImageWidget.setImageBitmap(GlobalUtils.stringToBitmap(image));

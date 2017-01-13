@@ -3,7 +3,6 @@ package fr.enssat.regnaultnantel.geoquest.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import fr.enssat.regnaultnantel.geoquest.R;
@@ -57,15 +56,5 @@ public class BeaconsListActivity extends AbstractGeoQuestActivity {
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "onActivityResult with request code = " + requestCode);
-        if (resultCode == RESULT_OK) {
-            //TODO: Refresh list view
-        }
-    }
-
-    private void refreshListView() {
-    }
 
 }

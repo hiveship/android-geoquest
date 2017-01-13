@@ -47,53 +47,16 @@ public class AddBeaconActivity extends AbstractGeoQuestActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_beacon);
+
         mItineraryRepository = new ItineraryRepository(this);
         String itineraryName = getIntent().getExtras().getString(Constants.ITINERARY_INTENT_PARAM);
         mItinerary = mItineraryRepository.load(itineraryName);
         mNewBeacon = new Beacon();
 
-        mSaveButton = (Button) findViewById(R.id.beacon_save_button);
-        mSaveButton.setEnabled(false);
-        mSaveButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                double longitude = Double.valueOf(mLongitudeWidget.getText().toString());
-                double latitude = Double.valueOf(mLatitudeWidget.getText().toString());
-                mNewBeacon.setCoordinates(new Coordinates(longitude, latitude));
-                mNewBeacon.setHintString(mHintStringWidget.getText().toString());
-                Bitmap bitmap = ((BitmapDrawable) mHintImageWidget.getDrawable()).getBitmap();
-                mNewBeacon.setHintImage(GlobalUtils.bitmapToBase64String(bitmap));
-
-                mItinerary.getBeacons().add(mNewBeacon);
-                mItineraryRepository.update(mItinerary);
-                onBackPressed();
-            }
-        });
-
-        mHintImageWidget = (ImageView) findViewById(R.id.beacon_take_hint_image);
-        mHintImageWidget.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, REQUEST_CODE_CAMERA);
-            }
-        });
-
-        mHintStringWidget = (EditText) findViewById(R.id.field_beacon_hint_string);
-        mLongitudeWidget = (EditText) findViewById(R.id.field_beacon_longitude);
-        mLatitudeWidget = (EditText) findViewById(R.id.field_beacon_latitude);
-        mHintStringWidget.addTextChangedListener(new EmptyTextWatcher());
-        mLongitudeWidget.addTextChangedListener(new EmptyTextWatcher());
-        mLatitudeWidget.addTextChangedListener(new EmptyTextWatcher());
-
-        mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        mLocationListener = new AbstractLocationListenerImpl() {
-            @Override
-            public void onLocationChanged(Location location) {
-                mLongitudeWidget.setText(Double.toString(location.getLongitude()));
-                mLatitudeWidget.setText(Double.toString(location.getLatitude()));
-            }
-        };
+        initSaveButton();
+        initHintImageWidget();
+        initTextWidgets();
+        initLocationListener();
     }
 
     @Override
@@ -119,9 +82,63 @@ public class AddBeaconActivity extends AbstractGeoQuestActivity {
         if (requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             mHintImageWidget.setImageBitmap(photo);
-            //mNewBeacon.setHintImage(GlobalUtils.bitmapToBase64String(photo));
         }
     }
+
+    private void initLocationListener() {
+        mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        mLocationListener = new AbstractLocationListenerImpl() {
+            @Override
+            public void onLocationChanged(Location location) {
+                // Deprecated since API 24
+                mLongitudeWidget.setText(String.format(getResources().getConfiguration().locale, "%1$,.6f", location.getLongitude()));
+                mLatitudeWidget.setText(String.format(getResources().getConfiguration().locale, "%1$,.6f", location.getLatitude()));
+            }
+        };
+    }
+
+    private void initTextWidgets() {
+        EmptyTextWatcher textWatcher = new EmptyTextWatcher();
+        mHintStringWidget = (EditText) findViewById(R.id.field_beacon_hint_string);
+        mLatitudeWidget = (EditText) findViewById(R.id.field_beacon_latitude);
+        mLongitudeWidget = (EditText) findViewById(R.id.field_beacon_longitude);
+        mLongitudeWidget.addTextChangedListener(textWatcher);
+        mHintStringWidget.addTextChangedListener(textWatcher);
+        mLatitudeWidget.addTextChangedListener(textWatcher);
+    }
+
+    private void initHintImageWidget() {
+        mHintImageWidget = (ImageView) findViewById(R.id.beacon_take_hint_image);
+        mHintImageWidget.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, REQUEST_CODE_CAMERA);
+            }
+        });
+    }
+
+    private void initSaveButton() {
+        mSaveButton = (Button) findViewById(R.id.beacon_save_button);
+        mSaveButton.setEnabled(false);
+        mSaveButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                double longitude = Double.valueOf(mLongitudeWidget.getText().toString());
+                double latitude = Double.valueOf(mLatitudeWidget.getText().toString());
+                mNewBeacon.setCoordinates(new Coordinates(longitude, latitude));
+                mNewBeacon.setHintString(mHintStringWidget.getText().toString());
+                Bitmap bitmap = ((BitmapDrawable) mHintImageWidget.getDrawable()).getBitmap();
+                mNewBeacon.setHintImage(GlobalUtils.bitmapToBase64String(bitmap));
+
+                mItinerary.getBeacons().add(mNewBeacon);
+                mItineraryRepository.update(mItinerary);
+                onBackPressed();
+            }
+        });
+    }
+
+
 
     class EmptyTextWatcher implements TextWatcher {
         @Override

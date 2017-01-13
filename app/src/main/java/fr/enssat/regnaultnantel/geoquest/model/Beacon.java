@@ -10,7 +10,6 @@ public class Beacon {
     private String mHintImage;
     private Coordinates mCoordinates;
 
-
     /**
      * Returns a text information about the current beacon.
      */
