@@ -8,6 +8,15 @@ public class Coordinates {
     private double mLongitude;
     private double mLatitude;
 
+    public Coordinates() {
+        // Needed by Jackson
+    }
+
+    public Coordinates(double longitude, double latitude) {
+        this.mLatitude = latitude;
+        this.mLongitude = longitude;
+    }
+
     public double getLongitude() {
         return mLongitude;
     }

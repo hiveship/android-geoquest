@@ -13,22 +13,22 @@ import fr.enssat.regnaultnantel.geoquest.utilities.GlobalUtils;
 
 public class BeaconAdapter extends BaseAdapter {
 
-    private Itinerary itinerary;
+    private Itinerary mItinerary;
     private LayoutInflater mInflater;
 
     public BeaconAdapter(Context context, Itinerary itinerary) {
-        this.itinerary = itinerary;
+        this.mItinerary = itinerary;
         mInflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return itinerary.getBeacons().size();
+        return mItinerary.getBeacons().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return itinerary.getBeacons().get(position);
+        return mItinerary.getBeacons().get(position);
     }
 
     @Override
@@ -50,11 +50,11 @@ public class BeaconAdapter extends BaseAdapter {
         TextView latitudeWidget = (TextView) item.findViewById(R.id.beacon_latitude);
         ImageView hintImageWidget = (ImageView) item.findViewById(R.id.beacon_hint_image);
 
-        hintStringWidget.setText(itinerary.getBeacons().get(position).getHintString());
-        longitudeWidget.setText("Longitude " + itinerary.getBeacons().get(position).getCoordinates().getLongitude()); //FIXME
-        latitudeWidget.setText("Latitude " + itinerary.getBeacons().get(position).getCoordinates().getLatitude()); //FIXME
+        hintStringWidget.setText(mItinerary.getBeacons().get(position).getHintString());
+        longitudeWidget.setText("Longitude " + mItinerary.getBeacons().get(position).getCoordinates().getLongitude()); //FIXME
+        latitudeWidget.setText("Latitude " + mItinerary.getBeacons().get(position).getCoordinates().getLatitude()); //FIXME
 
-        String image = itinerary.getBeacons().get(position).getHintImage();
+        String image = mItinerary.getBeacons().get(position).getHintImage();
         if (image != null) {
             hintImageWidget.setImageBitmap(GlobalUtils.stringToBitmap(image));
         }

@@ -31,7 +31,7 @@ import fr.enssat.regnaultnantel.geoquest.utilities.GlobalUtils;
 public class GameActivity extends AbstractGeoQuestActivity implements OnMapReadyCallback {
 
     private LocationManager mLocationManager;
-    private ItineraryRepository mItineraryRepository = new ItineraryRepository(this);
+    private ItineraryRepository mItineraryRepository;
     private AbstractLocationListenerImpl mLocationListener;
 
     private GoogleMap mMap;
@@ -49,6 +49,7 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        mItineraryRepository = new ItineraryRepository(this);
 
         String itineraryName = getIntent().getStringExtra(Constants.ITINERARY_INTENT_PARAM);
         Itinerary itinerary = mItineraryRepository.load(itineraryName);
@@ -58,8 +59,6 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
         } else {
             initGame(itinerary);
         }
-
-        //initGame(itinerary);
     }
 
     private void initGame(Itinerary itinerary) {

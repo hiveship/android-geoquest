@@ -50,6 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:inputType="numberDecimal"
                 android:hint="@string/latitude"
                 android:id="@+id/field_beacon_latitude"
                 android:textColor="@color/textWhite"
@@ -60,6 +61,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/longitude"
+                android:inputType="numberDecimal"
                 android:id="@+id/field_beacon_longitude"
                 android:textColor="@color/textWhite"
                 android:textColorHint="@color/textWhite"/>

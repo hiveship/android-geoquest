@@ -27,8 +27,16 @@ public class BeaconsListActivity extends AbstractGeoQuestActivity {
         setContentView(R.layout.activity_beacons_list);
         mListView = (ListView) findViewById(R.id.beacons_list);
 
-        initializeListView();
         initializeCreateButton();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initializeListView();
+        if (mItinerary.getName().equals(Constants.DEFAULT_ITINERARY_NAME)) {
+            mAddButton.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void initializeListView() {
@@ -55,6 +63,9 @@ public class BeaconsListActivity extends AbstractGeoQuestActivity {
         if (resultCode == RESULT_OK) {
             //TODO: Refresh list view
         }
+    }
+
+    private void refreshListView() {
     }
 
 }

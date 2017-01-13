@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Geo Quest - Découvrez avec passion</string>
+    <string name="app_name">Geo Quest - Visiter en s\'amusant !</string>
     <string name="game_finish">Partie terminée !</string>
     <string name="image_view_hint">Image associée à l\'indice</string>
     <string name="finish_beacon">Vous venez d\'atteindre cette balise ! Passez à la suite ;)</string>
@@ -22,4 +22,5 @@
     <string name="activity_beacons_list">Balises de l\'itinéraire</string>
     <string name="error">Erreur</string>
     <string name="itinerary_no_beacons">Cet itinéraire ne contient aucune balise !</string>
+    <string name="invalid_coordinates">Format des coordonées invalide</string>
 </resources>
