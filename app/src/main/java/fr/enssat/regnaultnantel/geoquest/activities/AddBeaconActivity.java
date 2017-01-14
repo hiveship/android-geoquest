@@ -91,8 +91,8 @@ public class AddBeaconActivity extends AbstractGeoQuestActivity {
             @Override
             public void onLocationChanged(Location location) {
                 // Deprecated since API 24
-                mLongitudeWidget.setText(String.format(getResources().getConfiguration().locale, "%1$,.6f", location.getLongitude()));
-                mLatitudeWidget.setText(String.format(getResources().getConfiguration().locale, "%1$,.6f", location.getLatitude()));
+                mLongitudeWidget.setText(String.format(getResources().getConfiguration().locale, "%1$,.15f", location.getLongitude()));
+                mLatitudeWidget.setText(String.format(getResources().getConfiguration().locale, "%1$,.15f", location.getLatitude()));
             }
         };
     }
@@ -137,7 +137,6 @@ public class AddBeaconActivity extends AbstractGeoQuestActivity {
             }
         });
     }
-
 
 
     class EmptyTextWatcher implements TextWatcher {

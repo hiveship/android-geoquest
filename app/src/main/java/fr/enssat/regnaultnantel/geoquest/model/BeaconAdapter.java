@@ -55,8 +55,8 @@ public class BeaconAdapter extends BaseAdapter {
         Coordinates location = mItinerary.getBeacons().get(position).getCoordinates();
 
         // Deprecated since API 24
-        longitudeWidget.setText(String.format(context.getResources().getConfiguration().locale, "%1$,.6f", location.getLongitude()));
-        latitudeWidget.setText(String.format(context.getResources().getConfiguration().locale, "%1$,.6f", location.getLatitude()));
+        longitudeWidget.setText(String.format(context.getResources().getConfiguration().locale, "%1$,.15f", location.getLongitude()));
+        latitudeWidget.setText(String.format(context.getResources().getConfiguration().locale, "%1$,.15f", location.getLatitude()));
         String image = mItinerary.getBeacons().get(position).getHintImage();
         if (image != null) {
             hintImageWidget.setImageBitmap(GlobalUtils.stringToBitmap(image));

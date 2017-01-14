@@ -23,4 +23,5 @@
     <string name="error">Erreur</string>
     <string name="itinerary_no_beacons">Cet itinéraire ne contient aucune balise !</string>
     <string name="invalid_coordinates">Format des coordonées invalide</string>
+    <string name="launcher">Menu principal</string>
 </resources>

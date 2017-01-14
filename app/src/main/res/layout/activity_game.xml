@@ -16,6 +16,8 @@
                 android:src="@drawable/default_beacon_image"
                 android:layout_height="70dp"
                 android:layout_width="70dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
                 android:layout_gravity="center_horizontal"
                 android:contentDescription="@string/image_view_hint"/>
 

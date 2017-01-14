@@ -99,8 +99,10 @@ public class ItineraryListActivity extends AbstractGeoQuestActivity {
                         Itinerary newItinerary = new Itinerary();
                         newItinerary.setName(itineraryNameWidget.getText().toString());
                         Log.d(TAG, "Creating a new itinerary with name = " + itineraryNameWidget.getText().toString());
-                        mItineraryRepository.save(newItinerary);
-                        refreshListView();
+                        if (!"".equals(itineraryNameWidget.getText().toString().trim())) {
+                            mItineraryRepository.save(newItinerary);
+                            refreshListView();
+                        }
                     }
                 });
 
