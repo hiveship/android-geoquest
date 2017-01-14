@@ -26,6 +26,9 @@ import fr.enssat.regnaultnantel.geoquest.utilities.AbstractLocationListenerImpl;
 import fr.enssat.regnaultnantel.geoquest.utilities.Constants;
 import fr.enssat.regnaultnantel.geoquest.utilities.GlobalUtils;
 
+/**
+ * Activity to create a new beacon to an existing itinerary.
+ */
 public class AddBeaconActivity extends AbstractGeoQuestActivity {
 
     private static final int REQUEST_CODE_CAMERA = 1;
@@ -85,6 +88,9 @@ public class AddBeaconActivity extends AbstractGeoQuestActivity {
         }
     }
 
+    /**
+     * Initialise the location listener in order to be notified each time the user location changes.
+     */
     private void initLocationListener() {
         mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         mLocationListener = new AbstractLocationListenerImpl() {
@@ -97,6 +103,9 @@ public class AddBeaconActivity extends AbstractGeoQuestActivity {
         };
     }
 
+    /**
+     * Initialize the text widgets of the view. Validate the fields using a TextWatcher.
+     */
     private void initTextWidgets() {
         EmptyTextWatcher textWatcher = new EmptyTextWatcher();
         mHintStringWidget = (EditText) findViewById(R.id.field_beacon_hint_string);
@@ -107,6 +116,9 @@ public class AddBeaconActivity extends AbstractGeoQuestActivity {
         mLatitudeWidget.addTextChangedListener(textWatcher);
     }
 
+    /**
+     * A click on the image widget icon will start the camera to take a picture.
+     */
     private void initHintImageWidget() {
         mHintImageWidget = (ImageView) findViewById(R.id.beacon_take_hint_image);
         mHintImageWidget.setOnClickListener(new OnClickListener() {
@@ -118,6 +130,9 @@ public class AddBeaconActivity extends AbstractGeoQuestActivity {
         });
     }
 
+    /**
+     * Init the save button to update a new beacon when pressed. The save button is disabled by default.
+     */
     private void initSaveButton() {
         mSaveButton = (Button) findViewById(R.id.beacon_save_button);
         mSaveButton.setEnabled(false);
@@ -138,24 +153,27 @@ public class AddBeaconActivity extends AbstractGeoQuestActivity {
         });
     }
 
-
+    /**
+     * TextWatcher that check the fields (latitude, longitude and hint string) are set and then enable the save button.
+     */
     class EmptyTextWatcher implements TextWatcher {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if (!"".equals(mLatitudeWidget.getText().toString().trim()) && !"".equals(mLongitudeWidget.getText().toString().trim()) && !"".equals(mHintStringWidget.getText().toString().trim())) {
                 mSaveButton.setEnabled(true);
+            } else {
+                mSaveButton.setEnabled(false);
             }
         }
 
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            // Useless
+            // Don't need this event, just ignore it
         }
 
         @Override
         public void afterTextChanged(Editable s) {
-            // Useless
-
+            // Don't need this event, just ignore it
         }
     }
 }

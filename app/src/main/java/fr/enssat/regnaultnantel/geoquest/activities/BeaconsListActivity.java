@@ -11,6 +11,9 @@ import fr.enssat.regnaultnantel.geoquest.model.Itinerary;
 import fr.enssat.regnaultnantel.geoquest.model.ItineraryRepository;
 import fr.enssat.regnaultnantel.geoquest.utilities.Constants;
 
+/**
+ * Activity that list all the beacons of an itinerary.
+ */
 public class BeaconsListActivity extends AbstractGeoQuestActivity {
 
     private static final int REQUEST_CODE_NEW_BEACON = 1;
@@ -32,12 +35,17 @@ public class BeaconsListActivity extends AbstractGeoQuestActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        initializeListView();
+        initializeListView(); // refresh the data (find better way?)
+
+        // Don't allow the create beacon on the default itinerary (not stored in the SD Card)
         if (mItinerary.getName().equals(Constants.DEFAULT_ITINERARY_NAME)) {
             mAddButton.setVisibility(View.INVISIBLE);
         }
     }
 
+    /**
+     * Set the data of the listview.
+     */
     private void initializeListView() {
         String itineraryName = getIntent().getExtras().getString(Constants.ITINERARY_INTENT_PARAM);
         mItinerary = mItineraryRepository.load(itineraryName);

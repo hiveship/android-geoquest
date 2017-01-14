@@ -28,10 +28,12 @@ import fr.enssat.regnaultnantel.geoquest.utilities.AbstractLocationListenerImpl;
 import fr.enssat.regnaultnantel.geoquest.utilities.Constants;
 import fr.enssat.regnaultnantel.geoquest.utilities.GlobalUtils;
 
+/**
+ * Game activity of the Geo Quest application.
+ */
 public class GameActivity extends AbstractGeoQuestActivity implements OnMapReadyCallback {
 
     private LocationManager mLocationManager;
-    private ItineraryRepository mItineraryRepository;
     private AbstractLocationListenerImpl mLocationListener;
 
     private GoogleMap mMap;
@@ -49,10 +51,9 @@ public class GameActivity extends AbstractGeoQuestActivity implements OnMapReady
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        mItineraryRepository = new ItineraryRepository(this);
 
         String itineraryName = getIntent().getStringExtra(Constants.ITINERARY_INTENT_PARAM);
-        Itinerary itinerary = mItineraryRepository.load(itineraryName);
+        Itinerary itinerary = new ItineraryRepository(this).load(itineraryName);
 
         if (itinerary.getBeacons().isEmpty()) {
             alertItineraryNoBeacons(itinerary);
