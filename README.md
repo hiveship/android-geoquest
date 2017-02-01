@@ -7,7 +7,13 @@ L’objectif de ce projet est de développer un jeu de piste pour Android. L’
 
 ## Résultats
 ![1](./misc/1.png)
+
+
 ![2](./misc/2.png)
+
+
 ![3](./misc/3.png)
+
+
 ![4](./misc/4.png)
 
